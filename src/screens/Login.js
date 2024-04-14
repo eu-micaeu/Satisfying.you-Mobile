@@ -9,11 +9,19 @@ const Login = (props) => {
 
   }
 
+  const goToModificarPesquisa = () => {
+      
+      props.navigation.navigate('ModificarPesquisa')
+  
+    }
+
   return (
 
     <View>
       
-      <Button title="Ir para Agradecimentos" onPress={goToAgradecimentos}>Ir para Agradecimentos</Button>
+      <Button onPress={goToAgradecimentos}>Ir para Agradecimentos</Button>
+
+      <Button onPress={goToModificarPesquisa}>Ir para ModificarPesquisa</Button>
 
     </View>
 
