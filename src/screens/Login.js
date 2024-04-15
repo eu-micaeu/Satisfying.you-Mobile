@@ -7,7 +7,7 @@ const Login = (props) => {
     props.navigation.navigate('Agradecimentos')
   }
   const goToModificarPesquisa = () => {    
-      props.navigation.navigate('ModificarPesquisa')
+    props.navigation.navigate('ModificarPesquisa')
   }
   const goToHome = () => {    
     props.navigation.navigate('Home')
