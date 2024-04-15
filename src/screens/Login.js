@@ -15,6 +15,12 @@ const Login = (props) => {
   
     }
 
+  const goToHome = () => {
+
+    props.navigation.navigate('Home') 
+  
+  }
+
   return (
 
     <View>
@@ -22,6 +28,8 @@ const Login = (props) => {
       <Button onPress={goToAgradecimentos}>Ir para Agradecimentos</Button>
 
       <Button onPress={goToModificarPesquisa}>Ir para ModificarPesquisa</Button>
+
+      <Button onPress={goToHome}>Ir para Home</Button>
 
     </View>
 
