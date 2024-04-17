@@ -6,7 +6,7 @@ import ModificarPesquisa from "./src/screens/ModificarPesquisa";
 import Home from "./src/screens/Home";
 import Drawer from "./src/screens/Drawer";
 import AcoesPesquisa from "./src/screens/AcoesPesquisa";
-import NovaConta from ".src/screens/NovaConta"
+import NovaConta from "./src/screens/NovaConta"
 
 const Stack = createStackNavigator();
 
