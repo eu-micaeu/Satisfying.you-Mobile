@@ -3,6 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Login from "./src/screens/Login";
 import Agradecimentos from "./src/screens/Agradecimentos";
 import ModificarPesquisa from "./src/screens/ModificarPesquisa";
+import AcoesPesquisa from "./src/screens/AcoesPesquisa";
 
 const Stack = createStackNavigator();
 
@@ -14,6 +15,7 @@ const App = () => {
                 <Stack.Screen name="Login" component={Login}/>
                 <Stack.Screen name="Agradecimentos" component={Agradecimentos}/>
                 <Stack.Screen name="ModificarPesquisa" component={ModificarPesquisa}/>
+                <Stack.Screen name="AcoesPesquisa" component={AcoesPesquisa}/>
             </Stack.Navigator>
         </NavigationContainer>
     )
