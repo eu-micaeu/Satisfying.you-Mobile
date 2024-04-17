@@ -3,33 +3,37 @@ import { Button, TextInput } from 'react-native-paper'
 
 const Login = (props) => {
 
-  const goToAgradecimentos = () => {
-    props.navigation.navigate('Agradecimentos')
+  const goToNovaConta = () => {
+    props.navigation.navigate('NovaConta')
   }
-  const goToModificarPesquisa = () => {    
-    props.navigation.navigate('ModificarPesquisa')
-  }
+
   const goToDrawer = () => {    
     props.navigation.navigate('Drawer')
   }
+
   return (
 
     <View style={styles.body}>
+
       <Text style={styles.titulo}>Satisfying.you</Text>
+
       <Image source={require('../images/smile-icon.png')}></Image>
+
       <Text style={styles.text}>E-mail</Text>
-      <TextInput style={styles.textInput} placeholder='jurandir.pereira@hotmail.com'  placeholderTextColor= '#3F92C5'></TextInput>
+
+      <TextInput placeholder='jurandir.pereira@hotmail.com' placeholderTextColor= '#3F92C5' style={styles.textInput}></TextInput>
 
       <Text style={styles.text}>Senha</Text>
-      <TextInput style={styles.textInput} placeholder='********'  placeholderTextColor='#3F92C5'></TextInput>
-      <Text style={{color:'#FD7979',textAlign:'left'}}>E-mail e/ou senhas inválidos</Text>
+
+      <TextInput  placeholder='********' placeholderTextColor='#3F92C5' style={styles.textInput}></TextInput>
+
+      <Text style={{color:'#FD7979', textAlign:'left', fontFamily: 'AveriaLibre-Regular'}}>E-mail e/ou senhas inválidos</Text>
 
       <Button onPress={goToDrawer} style={styles.buttonEntrar}><Text style={styles.buttonText}>Entrar</Text></Button>
 
-      <Button /*onPress={goToNovaConta}*/ style={styles.buttonCriar}><Text style={styles.buttonText}>Criar minha conta</Text></Button>
+      <Button onPress={goToNovaConta} style={styles.buttonCriar}><Text style={styles.buttonText}>Criar minha conta</Text></Button>
 
       <Button /*onPress={goToRecuperarSenha}*/ style={styles.buttonEsqueci}><Text style={styles.buttonText}>Esqueci minha senha</Text></Button>
-
 
     </View>
 
@@ -45,28 +49,27 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 20,
   },
+
   titulo:{
     fontSize:30,
     color:'#FFFF',
     textAlign:'center',
-    fontFamily:'Averia Libre'
+    fontFamily:'AveriaLibre-Regular'
   },
+
   text: {
     color: '#fff',
-    fontFamily: 'Averia Libre',
-    fontSize: 18,
     textAlign: 'left',
     marginTop: 10,
     width: 300,
-    fontWeight: 'bold',
+    fontFamily:'AveriaLibre-Regular'
   },
 
   textInput: {
     backgroundColor: '#fff',
     width: 300,
-    height:51,
-    borderRadius: 0,
-    fontFamily:'Averia Libre'
+    height: 51,
+    fontFamily:'AveriaLibre-Regular'
   },
 
   buttonEntrar: {
@@ -82,18 +85,19 @@ const styles = StyleSheet.create({
     backgroundColor: '#419ED7',
     borderRadius: 0,
   },
+
   buttonEsqueci: {
     marginTop: 15,
     width: 300,
     backgroundColor: '#B0CCDE',
     borderRadius: 0,
   },
+
   buttonText: {
     color: '#fff',
-    fontFamily: 'Averia Libre',
+    fontFamily: 'AveriaLibre-Regular',
     fontSize: 15,
     textAlign: 'center',
-    fontWeight: 'bold',
   },
  
 });

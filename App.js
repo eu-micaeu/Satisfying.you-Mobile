@@ -18,7 +18,7 @@ const App = () => {
                                 screenOptions={{ 
                                 headerTintColor: '#FFFFFF', 
                                 headerStyle: { backgroundColor: '#2B1D62' },
-                                headerTitleStyle:{fontFamily:'AveriaLibre-Bold'}
+                                headerTitleStyle: { fontFamily:'AveriaLibre-Bold'}
                 }}>
                 <Stack.Screen name="Login" component={Login}/>
                 <Stack.Screen name="Agradecimentos" component={Agradecimentos}/>

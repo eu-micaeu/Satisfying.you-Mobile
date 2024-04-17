@@ -27,7 +27,7 @@ const ModificarPesquisa = (props) => {
         <Image source={require('../images/imagem.png')} style={{ width: 50, height: 50, marginTop: 20, marginBottom: 20 }} />
       </TextInput>
 
-      <Button style={styles.buttonSalvar} /*onPress={goToHome}*/ ><Text style={styles.buttonSalvarText}>Salvar</Text></Button>
+      <Button style={styles.buttonSalvar} onPress={goToHome}><Text style={styles.buttonSalvarText}>Salvar</Text></Button>
 
       <TouchableOpacity onPress={togglePopUp}>
 
@@ -77,35 +77,35 @@ const styles = StyleSheet.create({
 
   text: {
     color: '#fff',
-    fontFamily: 'monospace',
     fontSize: 18,
     textAlign: 'left',
     marginTop: 10,
     width: 300,
-    fontWeight: 'bold',
+    fontFamily:'AveriaLibre-Regular'
   },
 
   textInput: {
     backgroundColor: '#fff',
     width: 300,
     borderRadius: 0,
+    fontFamily:'AveriaLibre-Regular'
   },
 
   textInputData: {
     backgroundColor: '#fff',
     width: 300,
     borderRadius: 0,
-    fontFamily: 'monospace',
+    fontFamily:'AveriaLibre-Regular'
   },
 
   textInputImagem: {
     backgroundColor: '#fff',
     width: 300,
     height: 100,
-    fontFamily: 'monospace',
     fontSize: 70,
     borderRadius: 0,
     textAlign: 'center',
+    fontFamily:'AveriaLibre-Regular'
   },
 
   buttonSalvar: {
@@ -117,19 +117,17 @@ const styles = StyleSheet.create({
 
   buttonSalvarText: {
     color: '#fff',
-    fontFamily: 'monospace',
     fontSize: 18,
     textAlign: 'center',
-    fontWeight: 'bold',
+    fontFamily:'AveriaLibre-Regular'
   },
 
   textImage: {
     color: '#fff',
-    fontFamily: 'monospace',
     fontSize: 15,
     marginTop: 10,
-    fontWeight: 'bold',
     textAlign: 'center',
+    fontFamily:'AveriaLibre-Regular'
   },
 
   // PopUp
@@ -178,11 +176,10 @@ const styles = StyleSheet.create({
 
   textPopUp: {
     color: '#fff',
-    fontFamily: 'monospace',
     fontSize: 18,
     textAlign: 'center',
     marginVertical: 10,
-    fontWeight: 'bold',
+    fontFamily:'AveriaLibre-Regular'
   },
 
 });

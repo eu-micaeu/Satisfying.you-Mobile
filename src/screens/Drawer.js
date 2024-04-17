@@ -2,30 +2,43 @@ import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { View, TouchableOpacity, Text, Image } from 'react-native';
 import Home from './Home';
+
 import { StyleSheet } from 'react-native';
 
 const DrawerNavigator = createDrawerNavigator();
 
 const Drawer = () => {
+
     return (
+
         <DrawerNavigator.Navigator drawerContent={(props) => (
+
             <View style={{ flex: 1 }}>
+
                 <Text style={styles.usuario}>usuario@dominio.com</Text>
+
                 <View style={styles.linhaSeparadora}/>
+
                 <TouchableOpacity onPress={() => {props.navigation.navigate('Home');}} style={styles.botaoCima}>
+
                 <Image source={require('../images/paper.png')} style={styles.icone} />
+
                     <Text style={styles.textTelas}>Pesquisas</Text>
+
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={() => {/*logout*/}}
-                    style={styles.botaoBaixo}>
+                <TouchableOpacity onPress={() => {props.navigation.navigate('Login');}} style={styles.botaoBaixo}>
                     <Image source={require('../images/logout.png')} style={styles.icone} />
                     <Text style={styles.textTelas}>Sair</Text>
                 </TouchableOpacity>
             </View>
-        )} screenOptions={{drawerStyle: {backgroundColor: '#2B1D62'}, drawerLabelStyle: {color: '#FFFFFF'}, headerTitle: '', headerStyle: {backgroundColor: '#2B1D62'}, headerTintColor: '#FFFFFF'}}>
-            <DrawerNavigator.Screen name='Home' component={Home} />
+
+        )}screenOptions={{drawerStyle: {backgroundColor: '#2B1D62'}, drawerLabelStyle: {color: '#FFFFFF'}, headerTitle: '', headerStyle: {backgroundColor: '#2B1D62'}, headerTintColor: '#FFFFFF'}}>
+        
+        <DrawerNavigator.Screen name='Home' component={Home} />
+
         </DrawerNavigator.Navigator>
+
     )
 }
 
@@ -46,6 +59,7 @@ const styles = StyleSheet.create({
     textTelas: {
         color: '#FFFFFF', 
         fontSize: 25,
+        fontFamily:'AveriaLibre-Regular'
     },
     botaoCima: {
         flexDirection: 'row',

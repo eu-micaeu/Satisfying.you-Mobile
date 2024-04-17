@@ -48,6 +48,7 @@ const styles = {
     fontSize: 24,
     fontWeight: 'bold',
     color: '#fff',
+    fontFamily:'AveriaLibre-Regular',
   },
   container: { 
     flex: 1,
@@ -74,7 +75,7 @@ const styles = {
   text: {
     color: 'white',
     fontSize: 18,
-    fontFamily: 'Averia Libre',
+    fontFamily:'AveriaLibre-Regular',
   }
 };
 

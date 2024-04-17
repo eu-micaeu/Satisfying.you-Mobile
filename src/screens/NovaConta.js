@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, Text, TextInput, StyleSheet, Pressable } from "react-native";
 
 const NovaConta = (props) => {
+  
   const [email, setEmail] = useState('');
   const [senha1, setSenha1] = useState('');
   const [senha2, setSenha2] = useState('');
@@ -68,7 +69,7 @@ const NovaConta = (props) => {
           {errorMessage}
         </Text>
       )}
-      <Pressable /*onPress={goToLogin}*/ style={styles.buttonCadastrar}>
+      <Pressable onPress={goToLogin} style={styles.buttonCadastrar}>
         <Text style={styles.buttonText}>CADASTRAR</Text>
       </Pressable>
     </View>
@@ -111,4 +112,5 @@ const styles = StyleSheet.create({
   }  
     
   })
-  export default NovaConta;
+
+export default NovaConta;

@@ -32,11 +32,10 @@ const styles = StyleSheet.create({
 
   text: {
     color: '#000',
-    fontFamily: 'monospace', 
+    fontFamily:'AveriaLibre-Regular',
     fontSize: 18,
     textAlign: 'center',
     margin: 20,
-    fontWeight: 'bold',
   },
   
 });

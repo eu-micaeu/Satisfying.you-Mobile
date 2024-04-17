@@ -1,7 +1,8 @@
 import {View, Text, StyleSheet, Image} from 'react-native';
 import { Button, TextInput } from 'react-native-paper';
 
-const Home = () => {
+const Home = (props) => {
+
     return (
         <View style={styles.body}>
           <TextInput style={styles.textInput} placeholder='Insira o termo da busca...'></TextInput>
@@ -26,13 +27,14 @@ const styles = StyleSheet.create({
       textAlign: 'left',
       marginTop: 10,
       width: 300,
-      fontWeight: 'bold',
+      fontFamily:'AveriaLibre-Regular'
     },
   
     textInput: {
       backgroundColor: '#fff',
       width: 300,
       borderRadius: 0,
+      fontFamily:'AveriaLibre-Regular'
     },
   
     textInputData: {
@@ -40,6 +42,7 @@ const styles = StyleSheet.create({
       width: 300,
       borderRadius: 0,
       fontFamily: 'monospace',
+      fontFamily:'AveriaLibre-Regular'
     },
   
     textInputImagem: {
@@ -50,6 +53,7 @@ const styles = StyleSheet.create({
       fontSize: 70,
       borderRadius: 0,
       textAlign: 'center',
+      fontFamily:'AveriaLibre-Regular'
     },
   
     buttonSalvar: {
@@ -74,6 +78,7 @@ const styles = StyleSheet.create({
       marginTop: 10,
       fontWeight: 'bold',
       textAlign: 'center',
+      fontFamily:'AveriaLibre-Regular'
     },
   
   });
