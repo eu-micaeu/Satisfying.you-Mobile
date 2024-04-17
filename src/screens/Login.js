@@ -9,8 +9,8 @@ const Login = (props) => {
   const goToModificarPesquisa = () => {    
     props.navigation.navigate('ModificarPesquisa')
   }
-  const goToHome = () => {    
-    props.navigation.navigate('Home')
+  const goToDrawer = () => {    
+    props.navigation.navigate('Drawer')
   }
   return (
 
@@ -24,7 +24,7 @@ const Login = (props) => {
       <TextInput style={styles.textInput} placeholder='********'  placeholderTextColor='#3F92C5'></TextInput>
       <Text style={{color:'#FD7979',textAlign:'left'}}>E-mail e/ou senhas inválidos</Text>
 
-      <Button /*onPress={goToHome}*/ style={styles.buttonEntrar}><Text style={styles.buttonText}>Entrar</Text></Button>
+      <Button onPress={goToDrawer} style={styles.buttonEntrar}><Text style={styles.buttonText}>Entrar</Text></Button>
 
       <Button /*onPress={goToNovaConta}*/ style={styles.buttonCriar}><Text style={styles.buttonText}>Criar minha conta</Text></Button>
 
