@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     fontSize: 20,
     fontFamily: 'AveriaLibre-Bold',
-  },
+  }, 
   textInput: {
     backgroundColor: '#ffffff',
     width: 300,
