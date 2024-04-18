@@ -1,3 +1,4 @@
+import React from 'react';
 import { View, Text, StyleSheet, Image} from 'react-native'
 import { Button, TextInput } from 'react-native-paper'
 
@@ -18,17 +19,15 @@ const Login = (props) => {
   return (
 
     <View style={styles.body}>
-
-      <Text style={styles.titulo}>Satisfying.you</Text>
-
-      <Image style={styles.logo} source={require('../images/smile-icon.png')}></Image>
+      <View style={styles.container}>
+        <Text style={styles.titulo}>Satisfying.you</Text>
+        <Image style={styles.logo} source={require('../images/smile-icon.png')}></Image>
+      </View>
 
       <Text style={styles.text}>E-mail</Text>
-
       <TextInput placeholder='jurandir.pereira@hotmail.com' placeholderTextColor= '#3F92C5' style={styles.textInput}></TextInput>
 
       <Text style={styles.text}>Senha</Text>
-
       <TextInput  placeholder='********' placeholderTextColor='#3F92C5' style={styles.textInput}></TextInput>
 
       <Text style={{color:'#FD7979', textAlign:'left', fontFamily: 'AveriaLibre-Regular'}}>E-mail e/ou senhas inválidos</Text>
@@ -45,7 +44,10 @@ const Login = (props) => {
 
 }
 const styles = StyleSheet.create({
-
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center', // Alinha os itens verticalmente no centro
+  },
   body: {
     backgroundColor:'#372775',
     flex: 1,
@@ -55,7 +57,8 @@ const styles = StyleSheet.create({
   },
 
   logo:{
-    marginBottom: 30,
+    marginLeft: 30,
+    marginBottom:20
   },
 
   titulo:{
