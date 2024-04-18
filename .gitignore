@@ -24,7 +24,6 @@ ios/.xcode.env.local
 
 # Android/IntelliJ
 #
-android/
 build/
 .idea
 .gradle
@@ -66,3 +65,4 @@ yarn-error.log
 # testing
 /coverage
 node_modules
+/android

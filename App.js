@@ -9,6 +9,7 @@ import AcoesPesquisa from "./src/screens/AcoesPesquisa";
 import NovaConta from "./src/screens/NovaConta";
 import RecuperarSenha from "./src/screens/RecuperarSenha";
 import Coleta from "./src/screens/Coleta"
+
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -16,7 +17,7 @@ const App = () => {
     return (
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="RecuperarSenha"
+          initialRouteName="Login"
           screenOptions={{
             headerTintColor: '#FFFFFF',
             headerStyle: {backgroundColor: '#2B1D62'},

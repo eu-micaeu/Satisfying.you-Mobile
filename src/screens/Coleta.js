@@ -1,4 +1,3 @@
-
 import { StyleSheet, View, Text, Image, Pressable } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 

@@ -4,6 +4,10 @@ import { Button } from 'react-native-paper';
 
 const RecuperarSenha = (props) => {
 
+  goToLogin = () => {
+    props.navigation.navigate('Login')
+  }
+
     return (
       <View style={styles.body}>
         <Text style={styles.text}>E-mail</Text>
@@ -13,7 +17,7 @@ const RecuperarSenha = (props) => {
             placeholderTextColor='#419ED7'
             ></TextInput>
 
-        <Button /*onPress={}*/ style={styles.buttonEntrar}>
+        <Button onPress={goToLogin} style={styles.buttonEntrar}>
           <Text style={styles.buttonText}>Entrar</Text>
         </Button>
       </View>

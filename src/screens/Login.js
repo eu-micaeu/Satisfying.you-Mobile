@@ -3,6 +3,10 @@ import { Button, TextInput } from 'react-native-paper'
 
 const Login = (props) => {
 
+  const goToRecuperarSenha = () => {
+    props.navigation.navigate('RecuperarSenha')
+  }
+
   const goToNovaConta = () => {
     props.navigation.navigate('NovaConta')
   }
@@ -17,7 +21,7 @@ const Login = (props) => {
 
       <Text style={styles.titulo}>Satisfying.you</Text>
 
-      <Image source={require('../images/smile-icon.png')}></Image>
+      <Image style={styles.logo} source={require('../images/smile-icon.png')}></Image>
 
       <Text style={styles.text}>E-mail</Text>
 
@@ -33,7 +37,7 @@ const Login = (props) => {
 
       <Button onPress={goToNovaConta} style={styles.buttonCriar}><Text style={styles.buttonText}>Criar minha conta</Text></Button>
 
-      <Button /*onPress={goToRecuperarSenha}*/ style={styles.buttonEsqueci}><Text style={styles.buttonText}>Esqueci minha senha</Text></Button>
+      <Button onPress={goToRecuperarSenha} style={styles.buttonEsqueci}><Text style={styles.buttonText}>Esqueci minha senha</Text></Button>
 
     </View>
 
@@ -50,11 +54,16 @@ const styles = StyleSheet.create({
     padding: 20,
   },
 
+  logo:{
+    marginBottom: 30,
+  },
+
   titulo:{
     fontSize:30,
     color:'#FFFF',
     textAlign:'center',
-    fontFamily:'AveriaLibre-Regular'
+    fontFamily:'AveriaLibre-Regular',
+    marginBottom: 20,
   },
 
   text: {
