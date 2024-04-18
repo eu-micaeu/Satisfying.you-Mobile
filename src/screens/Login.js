@@ -4,11 +4,15 @@ import { Button, TextInput } from 'react-native-paper'
 const Login = (props) => {
 
   const goToNovaConta = () => {
-    props.navigation.navigate('NovaConta')
+    props.navigation.navigate('Nova Conta')
   }
 
   const goToDrawer = () => {    
     props.navigation.navigate('Drawer')
+  }
+
+  const goToRecuperarSenha = () => {
+    props.navigation.navigate('Recuperação de Senha')
   }
 
   return (
@@ -33,7 +37,7 @@ const Login = (props) => {
 
       <Button onPress={goToNovaConta} style={styles.buttonCriar}><Text style={styles.buttonText}>Criar minha conta</Text></Button>
 
-      <Button /*onPress={goToRecuperarSenha}*/ style={styles.buttonEsqueci}><Text style={styles.buttonText}>Esqueci minha senha</Text></Button>
+      <Button onPress={goToRecuperarSenha} style={styles.buttonEsqueci}><Text style={styles.buttonText}>Esqueci minha senha</Text></Button>
 
     </View>
 

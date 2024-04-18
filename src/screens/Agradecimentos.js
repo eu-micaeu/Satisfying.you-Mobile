@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    color: '#000',
+    color: '#FFFFFF',
     fontFamily:'AveriaLibre-Regular',
     fontSize: 18,
     textAlign: 'center',

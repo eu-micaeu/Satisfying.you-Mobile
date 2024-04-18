@@ -1,5 +1,5 @@
 
-import { StyleSheet, View, Text, Image, Pressable } from "react-native";
+import { StyleSheet, View, Text, Image } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 
@@ -41,10 +41,6 @@ const Coleta = (props) => {
                     <Text style={styles.text}>Péssimo</Text>
                 </View>
             </TouchableOpacity>
-          
-          
-          
-          
         </View>
     )
 }
@@ -58,12 +54,11 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       padding: 20,
     },
-  
     titulo:{
       fontSize:30,
       color:'#FFFF',
       textAlign:'center',
-      fontFamily:'AveriaLibre-Regular'
+      fontFamily:'AveriaLibre-Regular',
     },
     icone: {
         width: 50,
@@ -74,7 +69,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontFamily: 'AveriaLibre-Bold',
       },
-      iconeContainer: {
+    iconeContainer: {
         alignItems: 'center',
         justifyContent: 'center',
         marginTop: 30,
