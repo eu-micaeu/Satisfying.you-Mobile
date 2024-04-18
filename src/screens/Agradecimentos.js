@@ -1,6 +1,12 @@
 import { View, Text, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const Agradecimentos = (props) => {
+  const navigation = useNavigation();
+
+  setTimeout(() => {
+    navigation.navigate('Coleta');
+  }, 3000);
 
   return (
 
