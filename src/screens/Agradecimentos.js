@@ -1,13 +1,20 @@
+import { useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const Agradecimentos = (props) => {
   const navigation = useNavigation();
 
-  setTimeout(() => {
-    navigation.navigate('Coleta');
-  }, 3000);
+  useEffect(() => {
+    const timer = setTimeout(() => {
 
+      navigation.navigate('Coleta');
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+ 
   return (
 
     <View style={styles.body}>
