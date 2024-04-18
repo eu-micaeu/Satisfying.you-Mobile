@@ -19,7 +19,7 @@ const App = () => {
     return (
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Relatorio"
+          initialRouteName="Login"
           screenOptions={{
             headerTintColor: '#FFFFFF',
             headerStyle: {backgroundColor: '#2B1D62'},
