@@ -1,6 +1,11 @@
 import { View, Text, Pressable, Image } from 'react-native';
 
 const AcoesPesquisa = (props) => {
+
+  goToRelatorio = () => {
+    props.navigation.navigate('Relatorio');
+  }
+
   return (
     /*  <View style={styles.top}>
             <Pressable>
@@ -22,7 +27,7 @@ const AcoesPesquisa = (props) => {
           <Image source={require('../images/ColetarDados.png')} style={styles.image} />
           <Text style={styles.text}>ColetarDados</Text>
         </Pressable>
-        <Pressable style={styles.itemContainer}>
+        <Pressable style={styles.itemContainer} onPress={goToRelatorio}>
           <Image source={require('../images/Relatorio.png')} style={styles.image} />
           <Text style={styles.text}>Relatório</Text>
         </Pressable>

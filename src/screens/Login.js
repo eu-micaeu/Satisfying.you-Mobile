@@ -8,15 +8,11 @@ const Login = (props) => {
   }
 
   const goToNovaConta = () => {
-    props.navigation.navigate('Nova Conta')
+    props.navigation.navigate('NovaConta')
   }
 
   const goToDrawer = () => {    
     props.navigation.navigate('Drawer')
-  }
-
-  const goToRecuperarSenha = () => {
-    props.navigation.navigate('Recuperação de Senha')
   }
 
   return (
