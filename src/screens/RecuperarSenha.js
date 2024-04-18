@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, Text, TextInput, StyleSheet} from 'react-native';
 import { Button } from 'react-native-paper';
 
 const RecuperarSenha = (props) => {
 
-  goToLogin = () => {
-    props.navigation.navigate('Login')
+  const goToLogin = () => {
+    props.navigation.navigate('Login');
   }
 
     return (
@@ -16,9 +16,9 @@ const RecuperarSenha = (props) => {
             placeholder="jurandir.pereira@hotmail.com"
             placeholderTextColor='#419ED7'
             ></TextInput>
-
+        <Text style={{color:'#FD7979', textAlign:'left', fontFamily: 'AveriaLibre-Regular'}}>E-mail parece ser inválido</Text>
         <Button onPress={goToLogin} style={styles.buttonEntrar}>
-          <Text style={styles.buttonText}>Entrar</Text>
+          <Text style={styles.buttonText}>Recuperar</Text>
         </Button>
       </View>
     );
