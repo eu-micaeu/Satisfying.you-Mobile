@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { useState } from "react";
 import { View, Text, StyleSheet, Image, ScrollView } from 'react-native'
 import { Button, TextInput } from 'react-native-paper'
 
 const Login = (props) => {
+
+  const [email, setEmail] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const handleEmailChange = (text) => {
+    setEmail(text)
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    if (!re.test(String(email).toLowerCase())) {
+      setErrorMessage("E-mail e/ou senhas inválidos")
+      return
+    }
+  }
 
   const goToRecuperarSenha = () => {
     props.navigation.navigate('RecuperarSenha')
@@ -26,17 +37,28 @@ const Login = (props) => {
           </View>
 
           <Text style={styles.text}>E-mail</Text>
-          <TextInput placeholder='jurandir.pereira@hotmail.com' placeholderTextColor='#3F92C5' style={styles.textInput} />
-
+          <TextInput 
+            style={styles.textInput} 
+            placeholder='jurandir.pereira@hotmail.com' 
+            placeholderTextColor='#3F92C5' 
+            onChangeText={handleEmailChange}
+            keyboardType="email-address"
+          />
+          {errorMessage && (
+            <Text style={{ fontSize: 15, color: '#FD7979', fontFamily: 'AveriaLibre-Regular' }}>
+              {errorMessage}
+            </Text>
+          )}
           <Text style={styles.text}>Senha</Text>
-          <TextInput placeholder='********' placeholderTextColor='#3F92C5' style={styles.textInput} />
-
-          <Text style={{ color: '#FD7979', textAlign: 'left', fontFamily: 'AveriaLibre-Regular' }}>E-mail e/ou senhas inválidos</Text>
+          <TextInput 
+            style={styles.textInput} 
+            placeholder='********' 
+            placeholderTextColor='#3F92C5'
+            secureTextEntry={true}
+          />
 
           <Button onPress={goToDrawer} style={styles.buttonEntrar}><Text style={styles.buttonText}>Entrar</Text></Button>
-
           <Button onPress={goToNovaConta} style={styles.buttonCriar}><Text style={styles.buttonText}>Criar minha conta</Text></Button>
-
           <Button onPress={goToRecuperarSenha} style={styles.buttonEsqueci}><Text style={styles.buttonText}>Esqueci minha senha</Text></Button>
 
         </View>
@@ -79,15 +101,18 @@ const styles = StyleSheet.create({
   text: {
     color: '#fff',
     textAlign: 'left',
+    fontSize:20,
     marginTop: 10,
     width: 300,
     fontFamily: 'AveriaLibre-Regular'
   },
   textInput: {
     backgroundColor: '#fff',
+    fontSize:20,
     width: 300,
     height: 51,
-    fontFamily: 'AveriaLibre-Regular'
+    fontFamily: 'AveriaLibre-Regular',
+    color: '#3F92C5'
   },
   buttonEntrar: {
     marginTop: 30,

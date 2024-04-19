@@ -16,8 +16,8 @@ const NovaConta = (props) => {
     if (!re.test(String(email).toLowerCase())) {
       setErrorMessage("E-mail inválido")
       return
+      
     }
-
   }
 
   const handleSenha1Change = (text) => {
