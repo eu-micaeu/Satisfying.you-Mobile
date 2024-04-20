@@ -1,6 +1,5 @@
 import React from 'react';
-import {View, Text, TextInput, StyleSheet} from 'react-native';
-import { Button } from 'react-native-paper';
+import {View, Text, TextInput, StyleSheet, Pressable} from 'react-native';
 
 const RecuperarSenha = (props) => {
 
@@ -17,9 +16,9 @@ const RecuperarSenha = (props) => {
             placeholderTextColor='#419ED7'
             ></TextInput>
         <Text style={{color:'#FD7979', textAlign:'left', fontFamily: 'AveriaLibre-Regular'}}>E-mail parece ser inválido</Text>
-        <Button onPress={goToLogin} style={styles.buttonEntrar}>
-          <Text style={styles.buttonText}>Recuperar</Text>
-        </Button>
+        <Pressable onPress={goToLogin} style={styles.buttonEntrar}>
+          <Text style={styles.buttonText}>RECUPERAR</Text>
+        </Pressable>
       </View>
     );
 }
@@ -32,34 +31,40 @@ const styles = StyleSheet.create({
     paddingLeft: 50,
     gap: 7,
   },
+  
   text: {
     color: '#fff',
-    fontFamily: 'monospace',
-    fontSize: 18,
+    paddingTop: 15,
+    fontSize: 20,
     textAlign: 'left',
-    marginTop: 10,
     width: 300,
-    fontFamily: 'AveriaLibre-Regular',
+    fontFamily: 'AveriaLibre-Bold',
   },
+
   textInput: {
     backgroundColor: '#fff',
+    fontSize:20,
     width: 300,
-    borderRadius: 0,
+    height: 51,
     fontFamily: 'AveriaLibre-Regular',
+    color: '#3F92C5'
   },
+
   buttonEntrar: {
-    marginTop: 30,
-    marginBottom: 30,
+    marginTop: 60,
     width: 300,
-    backgroundColor: '#37BD6D',
-    borderRadius: 0,
+    height: 50,
+    backgroundColor: '#37BD6D'
   },
+
   buttonText: {
-    color: '#fff',
-    fontFamily: 'AveriaLibre-Regular',
-    fontSize: 15,
+    color: '#FFFFFF',
     textAlign: 'center',
-  },
+    paddingTop: 10,
+    fontFamily: 'AveriaLibre-Regular',
+    fontSize: 25
+  }
+
 });
 
 export default RecuperarSenha;

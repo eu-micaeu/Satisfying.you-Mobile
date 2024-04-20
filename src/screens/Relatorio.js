@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, ScrollView, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import PieChart from 'react-native-pie-chart';
 
 class Relatorio extends Component {

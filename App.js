@@ -48,7 +48,6 @@ const App = () => {
           <Stack.Screen
             name="Coleta"
             component={Coleta}
-            options={{headerShown: false}}
           />
           <Stack.Screen name="NovaPesquisa" component={NovaPesquisa} />
           <Stack.Screen name="Relatorio" component={Relatorio} />

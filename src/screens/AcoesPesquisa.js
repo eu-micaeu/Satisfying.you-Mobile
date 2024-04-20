@@ -6,6 +6,14 @@ const AcoesPesquisa = (props) => {
     props.navigation.navigate('Relatorio');
   }
 
+  goToColeta = () => {
+    props.navigation.navigate('Coleta');
+  }
+
+  goToModificar = () => {
+    props.navigation.navigate('ModificarPesquisa');
+  }
+
   return (
     /*  <View style={styles.top}>
             <Pressable>
@@ -19,11 +27,11 @@ const AcoesPesquisa = (props) => {
     <>
     <View style={styles.container}>
       <View style={styles.columnContainer}>
-        <Pressable style={styles.itemContainer}>
+        <Pressable style={styles.itemContainer} onPress={goToModificar}>
           <Image source={require('../images/Modificar.png')} style={styles.image} />
           <Text style={styles.text}>Modificar</Text>
         </Pressable>
-        <Pressable style={styles.itemContainer}>
+        <Pressable style={styles.itemContainer} onPress={goToColeta}>
           <Image source={require('../images/ColetarDados.png')} style={styles.image} />
           <Text style={styles.text}>ColetarDados</Text>
         </Pressable>

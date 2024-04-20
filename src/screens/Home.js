@@ -50,23 +50,27 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+
   viewTextInput: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'white',
   },
+
   textInput: {
     backgroundColor: '#fff',
     width: 300,
     borderRadius: 0,
     fontFamily: 'AveriaLibre-Regular'
   },
+
   buttonNovaPesquisa: {
     width: 300,
     height: 50,
     backgroundColor: '#37BD6D',
     marginTop: 20
   },
+
   buttonNovaPesquisaText: {
     color: '#FFFFFF',
     textAlign: 'center',
@@ -74,20 +78,25 @@ const styles = StyleSheet.create({
     fontFamily: 'AveriaLibre-Regular',
     fontSize: 25
   },
+
   card: {
     width: 200,
     alignItems: 'center',
     margin: 15,
   },
+
   cardImage: {
-    width: 150,
-    height: 150
+    width: 160,
+    height: 150,
+    margin: 12
   },
+
   title: {
     color: 'blue',
     fontSize: 20,
     fontFamily:'AveriaLibre-Regular',
   },
+  
   subtitle: {
     fontSize: 15,
     fontFamily: 'AveriaLibre-Regular'

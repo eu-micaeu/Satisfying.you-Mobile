@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, StyleSheet, Pressable } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+import { View, Text, TextInput, StyleSheet, Pressable, ScrollView } from "react-native";
 
 const NovaConta = (props) => {
 
@@ -47,9 +46,11 @@ const NovaConta = (props) => {
   return (
 
     <View style={styles.body}>
+
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
 
-        <Text style={styles.text}>Email</Text>
+        <Text style={styles.text}>E-mail</Text>
+
         <TextInput
           style={styles.textInput}
           placeholder="jurandir.pereira@hotmail.com"
@@ -57,12 +58,15 @@ const NovaConta = (props) => {
           onChangeText={handleEmailChange}
           keyboardType="email-address"
         />
+
         {errorMessage && (
           <Text style={{ fontSize: 17, color: '#FD7979', fontFamily: 'AveriaLibre-Regular' }}>
             {errorMessage}
           </Text>
         )}
+
         <Text style={styles.text}>Senha</Text>
+
         <TextInput
           style={styles.textInput}
           secureTextEntry={true}
@@ -72,17 +76,20 @@ const NovaConta = (props) => {
         />
 
         <Text style={styles.text}>Repetir senha</Text>
+
         <TextInput
           style={styles.textInput}
           secureTextEntry={true}
           placeholderTextColor="#3F92C5"
           onChangeText={handleSenha2Change}
         />
+
         {errorMessage && (
           <Text style={{ fontSize: 17, color: '#FD7979', fontFamily: 'AveriaLibre-Regular' }}>
             {errorMessage}
           </Text>
         )}
+
         <Pressable onPress={goToLogin} style={styles.buttonCadastrar}>
           <Text style={styles.buttonText}>CADASTRAR</Text>
         </Pressable>
@@ -118,11 +125,12 @@ const styles = StyleSheet.create({
   },
 
   textInput: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#fff',
+    fontSize:20,
     width: 300,
-    height: 50,
-    fontSize: 20,
-    color: '#3F92C5',
+    height: 51,
+    fontFamily: 'AveriaLibre-Regular',
+    color: '#3F92C5'
   },
 
   buttonCadastrar: {

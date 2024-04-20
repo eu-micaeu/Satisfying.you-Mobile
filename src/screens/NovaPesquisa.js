@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, Modal, TouchableOpacity, Pressable } from 'react-native';
-import { Button, TextInput } from 'react-native-paper';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
 
-const ModificarPesquisa = (props) => {
+const NovaPesquisa = (props) => {
 
     goToHome = () => {
         props.navigation.navigate('Home');
@@ -49,4 +47,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default ModificarPesquisa;
+export default NovaPesquisa;
