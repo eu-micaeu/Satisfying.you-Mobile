@@ -19,7 +19,7 @@ const App = () => {
     return (
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="ModificarPesquisa"
+          initialRouteName="Login"
           screenOptions={{
             headerTintColor: '#FFFFFF',
             headerStyle: {backgroundColor: '#2B1D62'},
@@ -46,7 +46,11 @@ const App = () => {
             component={Drawer}
             options={{headerShown: false}}
           />
-          <Stack.Screen name="AcoesPesquisa" component={AcoesPesquisa} />
+          <Stack.Screen 
+            name="AcoesPesquisa" 
+            component={AcoesPesquisa} 
+            options={{headerShown: false}}  
+          />
           <Stack.Screen name="NovaConta" component={NovaConta} />
           <Stack.Screen name="RecuperarSenha" component={RecuperarSenha} />
           <Stack.Screen

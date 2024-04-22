@@ -74,11 +74,10 @@ const NovaPesquisa = (props) => {
 const styles = {
   container: {
     flex: 1,
-    padding: 20,
     backgroundColor: '#372775',
-    paddingTop: 50,
     fontFamily: 'AveriaLibre-Regular',
   },
+
   top: {
     flexDirection: 'row',
     padding: 20,

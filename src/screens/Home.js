@@ -21,7 +21,7 @@ const Home = (props) => {
         <Image source={require('../images/pesquisa.png')}/>
         <TextInput style={styles.textInput} placeholder='Insira o termo da busca...'/>
       </View>
-      <Pressable onPress={goToAcoesPesquisa}>
+      <Pressable onPress={goToAcoesPesquisa} style={styles.containerCards}>
         {cards.map((card, index) => (
           <Pressable key={index} onPress={goToAcoesPesquisa}>
             <Card style={styles.card}>
@@ -47,7 +47,6 @@ const styles = StyleSheet.create({
   body: {
     backgroundColor: '#382474',
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
   },
 
@@ -66,28 +65,37 @@ const styles = StyleSheet.create({
 
   buttonNovaPesquisa: {
     width: 300,
-    height: 50,
+    height: 40,
     backgroundColor: '#37BD6D',
     justifyContent: 'center',
-    marginTop: 20
+    marginTop: 10
   },
 
   buttonNovaPesquisaText: {
     color: '#FFFFFF',
     textAlign: 'center',
     fontFamily: 'AveriaLibre-Regular',
-    fontSize: 25
+    fontSize: 15
+  },
+
+  containerCards: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-evenly',
+    marginTop: 10,
   },
 
   card: {
-    width: 200,
+    flexDirection: 'row',
+    width: 180,
+    height: 155,
     alignItems: 'center',
-    margin: 15,
-  },
+    margin: 5,
+  },  
 
   cardImage: {
-    width: 160,
-    height: 150,
+    width: 80,
+    height: 80,
     margin: 12
   },
 
