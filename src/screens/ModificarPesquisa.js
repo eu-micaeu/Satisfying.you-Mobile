@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, Modal, TouchableOpacity } from 'react-native';
-import { Button, TextInput } from 'react-native-paper';
+import { View, Text, StyleSheet, Image, Modal, TouchableOpacity, TextInput } from 'react-native';
+import { Button } from 'react-native-paper';
 
 const ModificarPesquisa = (props) => {
 
@@ -47,7 +47,7 @@ const ModificarPesquisa = (props) => {
 
             <View style={styles.divOptions}>
 
-              <Button style={styles.optionSim} /*onPress={goToHome}*/ ><Text style={styles.buttonSalvarText}>SIM</Text></Button>
+              <Button style={styles.optionSim} onPress={goToHome} ><Text style={styles.buttonSalvarText}>SIM</Text></Button>
 
               <Button style={styles.optionNao} onPress={togglePopUp}><Text style={styles.buttonSalvarText}>CANCELAR</Text></Button>
 

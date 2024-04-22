@@ -68,13 +68,13 @@ const styles = StyleSheet.create({
     width: 300,
     height: 50,
     backgroundColor: '#37BD6D',
+    justifyContent: 'center',
     marginTop: 20
   },
 
   buttonNovaPesquisaText: {
     color: '#FFFFFF',
     textAlign: 'center',
-    paddingTop: 10,
     fontFamily: 'AveriaLibre-Regular',
     fontSize: 25
   },

@@ -90,6 +90,7 @@ const styles = {
     padding: 20,
     backgroundColor: '#372775',
     alignItems: 'center',
+    justifyContent: 'center',
     fontFamily: 'AveriaLibre-Regular',
   },
 
