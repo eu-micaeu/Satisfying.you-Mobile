@@ -1,16 +1,15 @@
-import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import PieChart from 'react-native-pie-chart';
 
-class Relatorio extends Component {
-    render() {
+const Relatorio = () => {
+
         const widthAndHeight = 250;
         const series = [235, 321, 123, 322, 143, 132];
         const sliceColor = ['#F1CE7E', '#6994FE', '#5FCDA4', '#EA7288', '#53D8D8', '#808080'];
 
         return (
             <View style={styles.container}>
-                <PieChart widthAndHeight={widthAndHeight} series={series} sliceColor={sliceColor} coverFill="#FFA500" />
+                <PieChart widthAndHeight={widthAndHeight} series={series} sliceColor={sliceColor} coverFill="#FFA500" style={styles.grafico}/>
                 <View style={styles.containerLegendas}>
                     <View style={styles.columnContainer}>
                         <View style={styles.rowContainer}>
@@ -35,16 +34,20 @@ class Relatorio extends Component {
 
             </View>
         );
-    }
+
 }
 
 const styles = StyleSheet.create({
 
     container: {
         flex: 1,
-        alignItems: 'center',
+        flexDirection:'row',
         backgroundColor: '#382474',
         justifyContent: 'center',
+    },
+
+    grafico: {
+        margin: 15,
     },
 
     containerLegendas: {
@@ -61,7 +64,7 @@ const styles = StyleSheet.create({
     },
 
     columnContainer: {
-        margin: 40,
+        margin: 10,
         flexDirection: 'column',
     },
 

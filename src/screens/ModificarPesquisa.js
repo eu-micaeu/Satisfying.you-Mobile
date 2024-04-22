@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, Modal, TouchableOpacity, TextInput } from 'react-native';
+import { View, Text, StyleSheet, Image, Modal, TouchableOpacity, TextInput, Pressable } from 'react-native';
 import { Button } from 'react-native-paper';
 
 const ModificarPesquisa = (props) => {
@@ -10,32 +10,47 @@ const ModificarPesquisa = (props) => {
     props.navigation.navigate('Home');
   }
 
+  const goToAcoesPesquisa = () => {
+    props.navigation.navigate('AcoesPesquisa');
+  }
+
   const togglePopUp = () => {
     setShowPopUp(!showPopUp);
   }
 
   return (
     <View style={styles.body}>
+
+      <View style={styles.top}>
+        <Pressable onPress={goToAcoesPesquisa}>
+          <Image
+            style={styles.arrow}
+            source={require('../images/Vector.png')}
+          />
+        </Pressable>
+        <Text style={styles.title}>Modificar Pesquisa</Text>
+      </View>
+
       <Text style={styles.text}>Nome:</Text>
       <TextInput style={styles.textInput} placeholder='Carnaval 2024'></TextInput>
 
       <Text style={styles.text}>Data:</Text>
-      <TextInput style={styles.textInputData} placeholder='16/02/2024'></TextInput>
+      <TextInput style={styles.textInput} placeholder='16/02/2024'></TextInput>
 
-      <Text style={styles.text}>Imagem:</Text>
-      <TextInput style={styles.textInputImagem}>
-        <Image source={require('../images/imagem.png')} style={{ width: 50, height: 50, marginTop: 20, marginBottom: 20 }} />
-      </TextInput>
+      <View style={styles.containerImagem}>
+        <Text style={styles.text}>Imagem:</Text>
+        <TextInput style={styles.textInputImagem}></TextInput>
+      </View>
 
       <Button style={styles.buttonSalvar} onPress={goToHome}><Text style={styles.buttonSalvarText}>Salvar</Text></Button>
 
-      <TouchableOpacity onPress={togglePopUp}>
+      <TouchableOpacity onPress={togglePopUp} style={styles.apagar}>
 
         <Image source={require('../images/trash.png')} style={{ width: 16, height: 16, marginTop: 20 }} />
 
-      </TouchableOpacity>
+        <Text style={styles.textApagar} onPress={togglePopUp} >Apagar</Text>
 
-      <Text style={styles.textImage} onPress={togglePopUp}>Apagar</Text>
+      </TouchableOpacity>
 
       <Modal visible={showPopUp} transparent animationType="fade" onRequestClose={togglePopUp}>
 
@@ -70,46 +85,79 @@ const styles = StyleSheet.create({
   body: {
     backgroundColor: '#382474',
     flex: 1,
+    alignItems: 'center',
+  },
+
+  top: {
+    flexDirection: 'row',
+    padding: 20,
+    width: '100%',
+    backgroundColor: '#2B1D62',
+  },
+
+  arrow: {
+    width: 20,
+    height: 20,
+    marginRight: 20,
+  },
+
+  title: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: '#fff',
+  },
+
+  apagar: {
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 20,
+    position: 'absolute',
+    right: 20,
+    bottom: 20,
+  },
+
+  textApagar: {
+    color: '#fff',
+    fontSize: 14,
+    textAlign: 'center',
+    fontFamily: 'AveriaLibre-Regular'
+  },
+
+  containerImagem: {
+
+    width: 300,
+
   },
 
   text: {
     color: '#fff',
-    fontSize: 18,
+    fontSize: 14,
     textAlign: 'left',
-    marginTop: 10,
+    marginTop: 5,
     width: 300,
-    fontFamily:'AveriaLibre-Regular'
+    fontFamily: 'AveriaLibre-Regular'
   },
 
   textInput: {
     backgroundColor: '#fff',
     width: 300,
     borderRadius: 0,
-    fontFamily:'AveriaLibre-Regular'
-  },
-
-  textInputData: {
-    backgroundColor: '#fff',
-    width: 300,
-    borderRadius: 0,
-    fontFamily:'AveriaLibre-Regular'
+    fontFamily: 'AveriaLibre-Regular',
   },
 
   textInputImagem: {
     backgroundColor: '#fff',
-    width: 300,
-    height: 100,
-    fontSize: 70,
+    width: 100,
+    height: 50,
+    fontSize: 20,
     borderRadius: 0,
-    textAlign: 'center',
-    fontFamily:'AveriaLibre-Regular'
+    textAlign: 'left',
+    fontFamily: 'AveriaLibre-Regular'
   },
 
   buttonSalvar: {
-    marginTop: 35,
+    marginTop: 10,
+    height: 40,
     width: 300,
     backgroundColor: 'green',
     borderRadius: 0,
@@ -117,17 +165,9 @@ const styles = StyleSheet.create({
 
   buttonSalvarText: {
     color: '#fff',
-    fontSize: 18,
+    fontSize: 12,
     textAlign: 'center',
-    fontFamily:'AveriaLibre-Regular'
-  },
-
-  textImage: {
-    color: '#fff',
-    fontSize: 15,
-    marginTop: 10,
-    textAlign: 'center',
-    fontFamily:'AveriaLibre-Regular'
+    fontFamily: 'AveriaLibre-Regular'
   },
 
   // PopUp
@@ -179,7 +219,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: 'center',
     marginVertical: 10,
-    fontFamily:'AveriaLibre-Regular'
+    fontFamily: 'AveriaLibre-Regular'
   },
 
 });
