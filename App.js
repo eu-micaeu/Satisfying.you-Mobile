@@ -40,17 +40,16 @@ const App = () => {
             component={ModificarPesquisa}
             options={{headerShown: false}}
           />
-          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen 
+          name="Home" 
+          component={Home} 
+          />
           <Stack.Screen
             name="Drawer"
             component={Drawer}
             options={{headerShown: false}}
           />
-          <Stack.Screen 
-            name="AcoesPesquisa" 
-            component={AcoesPesquisa} 
-            options={{headerShown: false}}  
-          />
+          <Stack.Screen name="AcoesPesquisa" component={AcoesPesquisa} options={{headerShown: false}}  />
           <Stack.Screen name="NovaConta" component={NovaConta} />
           <Stack.Screen name="RecuperarSenha" component={RecuperarSenha} />
           <Stack.Screen

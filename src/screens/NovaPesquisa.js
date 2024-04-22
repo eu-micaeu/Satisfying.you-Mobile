@@ -72,6 +72,7 @@ const NovaPesquisa = (props) => {
 };
 
 const styles = {
+
   container: {
     flex: 1,
     backgroundColor: '#372775',
@@ -81,24 +82,28 @@ const styles = {
   top: {
     flexDirection: 'row',
     padding: 20,
+    width: '100%',
     backgroundColor: '#2B1D62',
   },
+
   arrow: {
     width: 20,
     height: 20,
-    marginTop:6,
     marginRight: 20,
   },
+
   title: {
-    fontSize: 24,
+    fontSize: 14,
     fontWeight: 'bold',
     color: '#fff',
   },
+
   label: {
     color: '#fff',
     fontSize: 16,
     marginTop: 10,
   },
+
   input: {
     height: 40,
     borderColor: '#ccc',
@@ -107,9 +112,11 @@ const styles = {
     padding: 10,
     width: '100%',
   },
+
   dateInputContainer: {
     flexDirection: 'row',
   },
+
   calendar: {
     width: 20,
     height: 20,
@@ -117,6 +124,7 @@ const styles = {
     right: 30,
     top: 10,
   },
+
   imageButton: {
     backgroundColor: '#fff',
     paddingTop: 25,
@@ -126,30 +134,36 @@ const styles = {
     marginBottom: 30,
     marginTop: 30,
   },
+
   imageText: {
     color: '#939393',
     fontSize: 12,
   },
+
   image: {
     width: 100,
     height: 100,
     resizeMode: 'contain',
   },
+
   button: {
     backgroundColor: '#37bd6d',
     color: '#fff',
     padding: 10,
     alignItems: 'center',
   },
+
   text: {
     color: '#fff',
     fontSize: 16,
   },
+
   alert: {
     color: '#FD7979',
     fontSize: 12,
     marginBottom: 5,  
   }
+  
 };
 
 export default NovaPesquisa;
