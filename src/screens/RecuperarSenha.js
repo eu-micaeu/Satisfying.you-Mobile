@@ -1,7 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {View, Text, TextInput, StyleSheet, Pressable} from 'react-native';
 
 const RecuperarSenha = (props) => {
+  
+  const [email, setEmail] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const handleEmailChange = text => {
+    setEmail(text);
+    const re =
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (!re.test(String(email).toLowerCase())) {
+      setErrorMessage('E-mail inválido');
+      return;
+    } else {
+      setErrorMessage("");
+      return;
+    }
+  };
 
   const goToLogin = () => {
     props.navigation.navigate('Login');
@@ -13,9 +29,16 @@ const RecuperarSenha = (props) => {
         <TextInput
             style={styles.textInput}
             placeholder="jurandir.pereira@hotmail.com"
-            placeholderTextColor='#419ED7'
-            ></TextInput>
-        <Text style={{color:'#FD7979', textAlign:'left', fontFamily: 'AveriaLibre-Regular'}}>E-mail parece ser inválido</Text>
+          placeholderTextColor='#419ED7'
+          onChangeText={handleEmailChange}
+        ></TextInput>
+        
+        {errorMessage && (
+          <Text style={{ fontSize: 17, color: '#FD7979', fontFamily: 'AveriaLibre-Regular' }}>
+            {errorMessage}
+          </Text>
+        )}
+
         <Pressable onPress={goToLogin} style={styles.buttonEntrar}>
           <Text style={styles.buttonText}>RECUPERAR</Text>
         </Pressable>
