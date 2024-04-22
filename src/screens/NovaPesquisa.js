@@ -33,147 +33,124 @@ const NovaPesquisa = (props) => {
 
   return (
     <>
-      <View style={styles.container}>
-
-        <View style={styles.nameInputContainer}>
-
-          <Text style={styles.text}>Nome</Text>
-          <TextInput
-            style={styles.textInput}
-            value={nomePesquisa}
-            onChangeText={text => setNomePesquisa(text)}
+      <View style={styles.top}>
+        <Pressable onPress={goToHome}>
+          <Image
+            style={styles.arrow}
+            source={require('../images/Vector.png')}
           />
-          {!!nomePesquisaError && <Text style={styles.alert}>{nomePesquisaError}</Text>}
-
-        </View>
-
-        <Text style={styles.text}>Data</Text>
-
+        </Pressable>
+        <Text style={styles.title}>Nova Pesquisa</Text>
+      </View>
+      <View style={styles.container}>
+        <Text style={styles.label}>Nome</Text>
+        <TextInput
+          style={styles.input}
+          value={nomePesquisa}
+          onChangeText={text => setNomePesquisa(text)}
+        />
+        {!!nomePesquisaError && <Text style={styles.alert}>{nomePesquisaError}</Text>}
+        <Text style={styles.label}>Data</Text>
         <View style={styles.dateInputContainer}>
           <TextInput
-            style={styles.textInput}
+            style={styles.input}
             value={dataPesquisa}
             onChangeText={text => setDataPesquisa(text)}
           />
-          {!!dataPesquisaError && <Text style={styles.alert}>{dataPesquisaError}</Text>}
-
-          <Text style={styles.text}>Imagem</Text>
-          <Pressable onPress={() => console.log('Calendário pressionado')}>
-          </Pressable>
+          <Image style={styles.calendar} source={require('../images/icon.png')} />
         </View>
-
-        <View style={styles.imageContainer}>
-
-          <Pressable style={styles.imageButton} onPress={() => console.log('Câmera/Galeria pressionado')}>
-
-            <Text style={styles.imageText}>Câmera/Galeria de imagens</Text>
-
-          </Pressable>
-
-        </View>
-
-        <Pressable style={styles.button} onPress={goToHome}>
-
-          <Text style={styles.buttonText}>CADASTRAR</Text>
-
+        {!!dataPesquisaError && <Text style={styles.alert}>{dataPesquisaError}</Text>}
+        <Pressable style={styles.imageButton}>
+          <Text style={styles.imageText}>Câmera/Galeria de imagens</Text>
         </Pressable>
-
+        <Pressable style={styles.button} onPress={handleCadastro}>
+          <Text style={styles.text}>CADASTRAR</Text>
+        </Pressable>
       </View>
     </>
   );
 };
 
 const styles = {
-
   container: {
     flex: 1,
     padding: 20,
     backgroundColor: '#372775',
-    alignItems: 'center',
-    justifyContent: 'center',
+    paddingTop: 50,
     fontFamily: 'AveriaLibre-Regular',
   },
-
+  top: {
+    flexDirection: 'row',
+    padding: 20,
+    backgroundColor: '#2B1D62',
+  },
+  arrow: {
+    width: 20,
+    height: 20,
+    marginTop:6,
+    marginRight: 20,
+  },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
     color: '#fff',
   },
-
-  text: {
+  label: {
     color: '#fff',
-    paddingTop: 15,
-    fontSize: 20,
-    textAlign: 'left',
-    width: 300,
-    fontFamily: 'AveriaLibre-Bold',
+    fontSize: 16,
+    marginTop: 10,
   },
-
-  textInput: {
+  input: {
+    height: 40,
+    borderColor: '#ccc',
+    borderWidth: 1,
     backgroundColor: '#fff',
-    fontSize: 20,
-    width: 300,
-    height: 51,
-    fontFamily: 'AveriaLibre-Regular',
-    color: '#3F92C5'
+    padding: 10,
+    width: '100%',
   },
-
+  dateInputContainer: {
+    flexDirection: 'row',
+  },
   calendar: {
     width: 20,
     height: 20,
-    marginBottom: 20,
+    position: 'relative',
+    right: 30,
+    top: 10,
   },
-
-  imageContainer: {
-    alignItems: 'left',
-    marginBottom: 20,
-    width: 300,
-  },
-
   imageButton: {
     backgroundColor: '#fff',
     paddingTop: 25,
     paddingBottom: 25,
     width: 180,
-    alignItems: 'left',
+    alignItems: 'center',
     marginBottom: 30,
+    marginTop: 30,
   },
-
   imageText: {
     color: '#939393',
     fontSize: 12,
-    fontFamily: 'AveriaLibre-Regular',
   },
-
   image: {
     width: 100,
     height: 100,
     resizeMode: 'contain',
   },
-
   button: {
-    width: 300,
-    height: 50,
-    backgroundColor: '#37BD6D',
-    marginTop: 20,
-    justifyContent: 'center',
+    backgroundColor: '#37bd6d',
+    color: '#fff',
+    padding: 10,
     alignItems: 'center',
   },
-
-  buttonText: {
+  text: {
     color: '#fff',
-    fontFamily: 'AveriaLibre-Regular',
-    fontSize: 28,
-    textAlign: 'center',
+    fontSize: 16,
   },
-
   alert: {
     color: '#FD7979',
     fontSize: 12,
-    marginBottom: 15,
+    marginBottom: 5,  
   }
-
 };
 
 export default NovaPesquisa;
-
