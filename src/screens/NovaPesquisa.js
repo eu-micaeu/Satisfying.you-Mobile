@@ -32,42 +32,31 @@ const NovaPesquisa = (props) => {
   };
 
   return (
-    <>
-      <View style={styles.top}>
-        <Pressable onPress={goToHome}>
-          <Image
-            style={styles.arrow}
-            source={require('../images/Vector.png')}
-          />
-        </Pressable>
-        <Text style={styles.title}>Nova Pesquisa</Text>
-      </View>
-      <View style={styles.container}>
-        <Text style={styles.label}>Nome</Text>
+    <View style={styles.container}>
+      <Text style={styles.label}>Nome</Text>
+      <TextInput
+        style={styles.input}
+        value={nomePesquisa}
+        onChangeText={text => setNomePesquisa(text)}
+      />
+      {!!nomePesquisaError && <Text style={styles.alert}>{nomePesquisaError}</Text>}
+      <Text style={styles.label}>Data</Text>
+      <View style={styles.dateInputContainer}>
         <TextInput
           style={styles.input}
-          value={nomePesquisa}
-          onChangeText={text => setNomePesquisa(text)}
+          value={dataPesquisa}
+          onChangeText={text => setDataPesquisa(text)}
         />
-        {!!nomePesquisaError && <Text style={styles.alert}>{nomePesquisaError}</Text>}
-        <Text style={styles.label}>Data</Text>
-        <View style={styles.dateInputContainer}>
-          <TextInput
-            style={styles.input}
-            value={dataPesquisa}
-            onChangeText={text => setDataPesquisa(text)}
-          />
-          <Image style={styles.calendar} source={require('../images/icon.png')} />
-        </View>
-        {!!dataPesquisaError && <Text style={styles.alert}>{dataPesquisaError}</Text>}
-        <Pressable style={styles.imageButton}>
-          <Text style={styles.imageText}>Câmera/Galeria de imagens</Text>
-        </Pressable>
-        <Pressable style={styles.button} onPress={handleCadastro}>
-          <Text style={styles.text}>CADASTRAR</Text>
-        </Pressable>
+        <Image style={styles.calendar} source={require('../images/icon.png')} />
       </View>
-    </>
+      {!!dataPesquisaError && <Text style={styles.alert}>{dataPesquisaError}</Text>}
+      <Pressable style={styles.imageButton}>
+        <Text style={styles.imageText}>Câmera/Galeria de imagens</Text>
+      </Pressable>
+      <Pressable style={styles.button} onPress={handleCadastro}>
+        <Text style={styles.text}>CADASTRAR</Text>
+      </Pressable>
+    </View>
   );
 };
 
@@ -77,31 +66,13 @@ const styles = {
     flex: 1,
     backgroundColor: '#372775',
     fontFamily: 'AveriaLibre-Regular',
-  },
-
-  top: {
-    flexDirection: 'row',
-    padding: 20,
-    width: '100%',
-    backgroundColor: '#2B1D62',
-  },
-
-  arrow: {
-    width: 20,
-    height: 20,
-    marginRight: 20,
-  },
-
-  title: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    color: '#fff',
+    alignItems: 'center',
   },
 
   label: {
     color: '#fff',
     fontSize: 16,
-    marginTop: 10,
+    marginTop: 5,
   },
 
   input: {
@@ -109,12 +80,7 @@ const styles = {
     borderColor: '#ccc',
     borderWidth: 1,
     backgroundColor: '#fff',
-    padding: 10,
-    width: '100%',
-  },
-
-  dateInputContainer: {
-    flexDirection: 'row',
+    width: 300,
   },
 
   calendar: {
@@ -131,8 +97,7 @@ const styles = {
     paddingBottom: 25,
     width: 180,
     alignItems: 'center',
-    marginBottom: 30,
-    marginTop: 30,
+    marginBottom: 10,
   },
 
   imageText: {
@@ -161,9 +126,9 @@ const styles = {
   alert: {
     color: '#FD7979',
     fontSize: 12,
-    marginBottom: 5,  
+    marginBottom: 5,
   }
-  
+
 };
 
 export default NovaPesquisa;

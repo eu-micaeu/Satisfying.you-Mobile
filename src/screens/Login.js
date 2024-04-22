@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Image, ScrollView, TextInput} from 'react-native'
+import { View, Text, StyleSheet, Image, TextInput} from 'react-native'
 import { Button } from 'react-native-paper'
 
 const Login = (props) => {
@@ -46,8 +46,6 @@ const Login = (props) => {
 
     <View style={styles.body}>
 
-      <ScrollView contentContainerStyle={styles.scrollViewContent}>
-
         <View style={styles.logoContainer}>
 
           <Text style={styles.titulo}>Satisfying.you</Text>
@@ -87,8 +85,6 @@ const Login = (props) => {
 
         <Button onPress={goToRecuperarSenha} style={styles.buttonEsqueci}><Text style={styles.buttonText}>Esqueci minha senha</Text></Button>
 
-      </ScrollView>
-
     </View>
 
   )
@@ -101,13 +97,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#372775',
     flex: 1,
     gap: 7,
-  },
-
-  scrollViewContent: {
-    flexGrow: 1,
-    justifyContent: 'center',
     alignItems: 'center',
-    padding: 20,
   },
 
   logoContainer: {
@@ -116,22 +106,21 @@ const styles = StyleSheet.create({
   },
 
   logo: {
+    marginTop: 10,
     marginLeft: 30,
-    marginBottom: 20
   },
 
   titulo: {
     fontSize: 30,
+    marginTop: 10,
     color: '#FFFF',
     textAlign: 'center',
     fontFamily: 'AveriaLibre-Regular',
-    marginBottom: 20,
   },
 
   text: {
     color: '#fff',
-    paddingTop: 15,
-    fontSize: 20,
+    fontSize: 16,
     textAlign: 'left',
     width: 300,
     fontFamily: 'AveriaLibre-Bold',
@@ -141,26 +130,21 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     fontSize: 20,
     width: 300,
-    height: 51,
     fontFamily: 'AveriaLibre-Regular',
     color: '#3F92C5'
   },
 
   buttonEntrar: {
-    marginTop: 30,
-    marginBottom: 30,
     width: 300,
     backgroundColor: '#37BD6D',
     borderRadius: 0,
   },
   buttonCriar: {
-    marginTop: 10,
     width: 300,
     backgroundColor: '#419ED7',
     borderRadius: 0,
   },
   buttonEsqueci: {
-    marginTop: 15,
     width: 300,
     backgroundColor: '#B0CCDE',
     borderRadius: 0,
@@ -168,7 +152,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#fff',
     fontFamily: 'AveriaLibre-Regular',
-    fontSize: 15,
+    fontSize: 14,
     textAlign: 'center',
   },
 });

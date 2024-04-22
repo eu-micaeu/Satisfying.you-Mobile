@@ -21,16 +21,6 @@ const ModificarPesquisa = (props) => {
   return (
     <View style={styles.body}>
 
-      <View style={styles.top}>
-        <Pressable onPress={goToAcoesPesquisa}>
-          <Image
-            style={styles.arrow}
-            source={require('../images/Vector.png')}
-          />
-        </Pressable>
-        <Text style={styles.title}>Modificar Pesquisa</Text>
-      </View>
-
       <Text style={styles.text}>Nome:</Text>
       <TextInput style={styles.textInput} placeholder='Carnaval 2024'></TextInput>
 
@@ -88,25 +78,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
-  top: {
-    flexDirection: 'row',
-    padding: 20,
-    width: '100%',
-    backgroundColor: '#2B1D62',
-  },
-
-  arrow: {
-    width: 20,
-    height: 20,
-    marginRight: 20,
-  },
-
-  title: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    color: '#fff',
-  },
-
   apagar: {
     flexDirection: 'column',
     justifyContent: 'center',
@@ -124,9 +95,7 @@ const styles = StyleSheet.create({
   },
 
   containerImagem: {
-
     width: 300,
-
   },
 
   text: {

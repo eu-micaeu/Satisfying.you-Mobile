@@ -4,7 +4,7 @@ import { TextInput, Card } from 'react-native-paper';
 const Home = (props) => {
 
   goToNovaPesquisa = () => {
-    props.navigation.navigate('NovaPesquisa');
+    props.navigation.navigate('Nova Pesquisa');
   }
   goToAcoesPesquisa = () => {
     props.navigation.navigate('AcoesPesquisa')

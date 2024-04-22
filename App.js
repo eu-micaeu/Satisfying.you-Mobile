@@ -17,50 +17,81 @@ const Stack = createStackNavigator();
 const App = () => {
 
     return (
+
       <NavigationContainer>
+
         <Stack.Navigator
+
           initialRouteName="Login"
+
           screenOptions={{
             headerTintColor: '#FFFFFF',
             headerStyle: {backgroundColor: '#2B1D62'},
             headerTitleStyle: {fontFamily: 'AveriaLibre-Bold'},
           }}>
+
           <Stack.Screen 
             name="Login"
             component={Login}
             options={{headerShown: false}}
-            />
+          />
+
           <Stack.Screen 
             name="Agradecimentos" 
             component={Agradecimentos} 
             options={{headerShown: false}}
           />
+
           <Stack.Screen 
-            name="ModificarPesquisa" 
+            name="Modificar Pesquisa" 
             component={ModificarPesquisa}
-            options={{headerShown: false}}
           />
+
           <Stack.Screen 
           name="Home" 
           component={Home} 
           />
+
           <Stack.Screen
             name="Drawer"
             component={Drawer}
             options={{headerShown: false}}
           />
-          <Stack.Screen name="AcoesPesquisa" component={AcoesPesquisa} options={{headerShown: false}}  />
-          <Stack.Screen name="NovaConta" component={NovaConta} />
-          <Stack.Screen name="RecuperarSenha" component={RecuperarSenha} />
+
+          <Stack.Screen 
+            name="AcoesPesquisa"
+            component={AcoesPesquisa} 
+          />
+          <Stack.Screen 
+            name="NovaConta" 
+            component={NovaConta} 
+          />
+          <Stack.Screen 
+            name="RecuperarSenha"
+            component={RecuperarSenha} 
+          />
+
           <Stack.Screen
             name="Coleta"
             component={Coleta}
           />
-          <Stack.Screen name="NovaPesquisa" options={{headerShown: false}} component={NovaPesquisa} />
-          <Stack.Screen name="Relatorio" component={Relatorio} />
+
+          <Stack.Screen 
+            name="Nova Pesquisa"
+            component={NovaPesquisa} 
+          />
+
+          <Stack.Screen 
+            name="Relatorio" 
+            component={Relatorio} 
+          />
+
         </Stack.Navigator>
+
       </NavigationContainer>
+
     );
+
 }
 
 export default App;

@@ -11,7 +11,7 @@ const AcoesPesquisa = (props) => {
   }
 
   goToModificar = () => {
-    props.navigation.navigate('ModificarPesquisa');
+    props.navigation.navigate('Modificar Pesquisa');
   }
 
   goToHome = () => {
@@ -20,15 +20,6 @@ const AcoesPesquisa = (props) => {
 
   return (
       <View style={styles.container}>
-        <View style={styles.top}>
-          <Pressable onPress={goToHome}>
-            <Image
-              style={styles.arrow}
-              source={require('../images/Vector.png')}
-            />
-          </Pressable>
-          <Text style={styles.title}>Ações da Pesquisa</Text>
-        </View>
         <View style={styles.columnContainer}>
           <Pressable style={styles.itemContainer} onPress={goToModificar}>
             <Image source={require('../images/Modificar.png')} style={styles.image} />
@@ -48,25 +39,6 @@ const AcoesPesquisa = (props) => {
 };
 
 const styles = {
-
-  top: {
-    flexDirection: 'row',
-    padding: 20,
-    width: '100%',
-    backgroundColor: '#2B1D62',
-  },
-
-  arrow: {
-    width: 20,
-    height: 20,
-    marginRight: 20,
-  },
-
-  title: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    color: '#fff',
-  },
 
   container: {
     flex: 1,
