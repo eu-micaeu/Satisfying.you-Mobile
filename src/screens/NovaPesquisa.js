@@ -50,9 +50,14 @@ const NovaPesquisa = (props) => {
         <Image style={styles.calendar} source={require('../images/icon.png')} />
       </View>
       {!!dataPesquisaError && <Text style={styles.alert}>{dataPesquisaError}</Text>}
-      <Pressable style={styles.imageButton}>
-        <Text style={styles.imageText}>Câmera/Galeria de imagens</Text>
-      </Pressable>
+
+      <View style={styles.containerImagem}>
+        <Text style={styles.text}>Imagem:</Text>
+        <Pressable style={styles.imageButton}>
+          <Text style={styles.imageText}>Câmera/Galeria de imagens</Text>
+        </Pressable>
+      </View>
+
       <Pressable style={styles.button} onPress={handleCadastro}>
         <Text style={styles.text}>CADASTRAR</Text>
       </Pressable>
@@ -73,6 +78,9 @@ const styles = {
     color: '#fff',
     fontSize: 16,
     marginTop: 5,
+    width: 300,
+    textAlign: 'left',
+    fontFamily: 'AveriaLibre-Regular'
   },
 
   input: {
@@ -80,6 +88,10 @@ const styles = {
     borderColor: '#ccc',
     borderWidth: 1,
     backgroundColor: '#fff',
+    width: 300,
+  },
+
+  containerImagem: {
     width: 300,
   },
 
@@ -96,6 +108,7 @@ const styles = {
     paddingTop: 25,
     paddingBottom: 25,
     width: 180,
+    height: 50,
     alignItems: 'center',
     marginBottom: 10,
   },
@@ -115,18 +128,23 @@ const styles = {
     backgroundColor: '#37bd6d',
     color: '#fff',
     padding: 10,
+    marginTop: 20,
+    width: 300,
     alignItems: 'center',
+    fontFamily: 'AveriaLibre-Regular'
   },
 
   text: {
     color: '#fff',
-    fontSize: 16,
+    fontSize: 14,
+    fontFamily: 'AveriaLibre-Regular'
   },
 
   alert: {
     color: '#FD7979',
     fontSize: 12,
     marginBottom: 5,
+    fontFamily: 'AveriaLibre-Regular'
   }
 
 };

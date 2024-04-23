@@ -26,13 +26,13 @@ const Login = (props) => {
 
   const goToRecuperarSenha = () => {
 
-    props.navigation.navigate('RecuperarSenha')
+    props.navigation.navigate('Recuperar Senha')
 
   }
 
   const goToNovaConta = () => {
 
-    props.navigation.navigate('NovaConta')
+    props.navigation.navigate('Nova Conta')
 
   }
 
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
   },
 
   titulo: {
-    fontSize: 30,
+    fontSize: 25,
     marginTop: 10,
     color: '#FFFF',
     textAlign: 'center',
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
 
   text: {
     color: '#fff',
-    fontSize: 16,
+    fontSize: 14,
     textAlign: 'left',
     width: 300,
     fontFamily: 'AveriaLibre-Bold',
@@ -130,6 +130,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     fontSize: 20,
     width: 300,
+    height: 40,
     fontFamily: 'AveriaLibre-Regular',
     color: '#3F92C5'
   },

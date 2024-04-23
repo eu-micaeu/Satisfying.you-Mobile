@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, StyleSheet, Pressable, ScrollView } from "react-native";
+import { View, Text, TextInput, StyleSheet, Pressable } from "react-native";
 
 const NovaConta = (props) => {
 
@@ -47,8 +47,6 @@ const NovaConta = (props) => {
 
     <View style={styles.body}>
 
-      <ScrollView contentContainerStyle={styles.scrollViewContent}>
-
         <Text style={styles.text}>E-mail</Text>
 
         <TextInput
@@ -94,7 +92,6 @@ const NovaConta = (props) => {
           <Text style={styles.buttonText}>CADASTRAR</Text>
         </Pressable>
 
-      </ScrollView>
     </View>
 
   );
@@ -106,19 +103,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#372775',
     flex: 1,
     gap: 7,
-  },
-
-  scrollViewContent: {
-    flexGrow: 1,
-    justifyContent: 'center',
+    flexDirection: 'column',
     alignItems: 'center',
-    padding: 20,
   },
 
   text: {
     color: '#fff',
-    paddingTop: 15,
-    fontSize: 20,
+    fontSize: 14,
     textAlign: 'left',
     width: 300,
     fontFamily: 'AveriaLibre-Bold',
@@ -128,24 +119,25 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     fontSize:20,
     width: 300,
-    height: 51,
+    height: 40,
     fontFamily: 'AveriaLibre-Regular',
     color: '#3F92C5'
   },
 
   buttonCadastrar: {
-    marginTop: 60,
     width: 300,
-    height: 50,
-    backgroundColor: '#37BD6D'
+    height: 40,
+    backgroundColor: '#37BD6D',
+    textAlign: 'center',
+    justifyContent: 'center',
+    marginTop: 15
   },
 
   buttonText: {
     color: '#FFFFFF',
     textAlign: 'center',
-    paddingTop: 10,
     fontFamily: 'AveriaLibre-Regular',
-    fontSize: 25
+    fontSize: 20
   }
 
 })

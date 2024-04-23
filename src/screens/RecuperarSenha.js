@@ -50,9 +50,7 @@ const styles = StyleSheet.create({
   body: {
     backgroundColor: '#372775',
     flex: 1,
-    paddingTop: 150,
-    paddingLeft: 50,
-    gap: 7,
+    alignItems: 'center',
   },
   
   text: {

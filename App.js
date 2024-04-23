@@ -59,15 +59,15 @@ const App = () => {
           />
 
           <Stack.Screen 
-            name="AcoesPesquisa"
+            name="Ações da Pesquisa"
             component={AcoesPesquisa} 
           />
           <Stack.Screen 
-            name="NovaConta" 
+            name="Nova Conta" 
             component={NovaConta} 
           />
           <Stack.Screen 
-            name="RecuperarSenha"
+            name="Recuperar Senha"
             component={RecuperarSenha} 
           />
 
@@ -82,7 +82,7 @@ const App = () => {
           />
 
           <Stack.Screen 
-            name="Relatorio" 
+            name="Relatório" 
             component={Relatorio} 
           />
 

@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         padding: 30,
         paddingBottom: 15,
+        fontFamily: 'AveriaLibre-Regular' 
     },
     linhaSeparadora: {
         height: 2,
@@ -57,6 +58,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
     },
     textTelas: {
+        fontFamily: 'AveriaLibre-Regular',
         color: '#FFFFFF', 
         fontSize: 25,
         fontFamily:'AveriaLibre-Regular'

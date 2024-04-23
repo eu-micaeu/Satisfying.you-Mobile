@@ -3,7 +3,7 @@ import { View, Text, Pressable, Image } from 'react-native';
 const AcoesPesquisa = (props) => {
 
   goToRelatorio = () => {
-    props.navigation.navigate('Relatorio');
+    props.navigation.navigate('Relatório');
   }
 
   goToColeta = () => {
