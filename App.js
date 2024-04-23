@@ -25,9 +25,9 @@ const App = () => {
           initialRouteName="Login"
 
           screenOptions={{
-            headerTintColor: '#FFFFFF',
+            headerTintColor: '#573FBA',
             headerStyle: {backgroundColor: '#2B1D62'},
-            headerTitleStyle: {fontFamily: 'AveriaLibre-Bold'},
+            headerTitleStyle: {fontFamily: 'AveriaLibre-Bold', color: '#fff'},
           }}>
 
           <Stack.Screen 
@@ -40,6 +40,7 @@ const App = () => {
             name="Agradecimentos" 
             component={Agradecimentos} 
             options={{headerShown: false}}
+
           />
 
           <Stack.Screen 
@@ -79,7 +80,6 @@ const App = () => {
           <Stack.Screen 
             name="Nova Pesquisa"
             component={NovaPesquisa} 
-            options={{headerShown: false}}
           />
 
           <Stack.Screen 

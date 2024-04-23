@@ -30,15 +30,6 @@ const NovaPesquisa = (props) => {
 
   return (
     <>
-      <View style={styles.top}>
-        <Pressable onPress={goToHome}>
-          <Image
-            style={styles.arrow}
-            source={require('../images/Vector.png')}
-          />
-        </Pressable>
-        <Text style={styles.title}>Nova Pesquisa</Text>
-      </View>
       <View style={styles.container}>
         <Text style={styles.label}>Nome</Text>
         <TextInput
@@ -75,34 +66,18 @@ const styles = {
     padding: 20,
     paddingTop: 5,
     backgroundColor: '#372775',
-    fontFamily: 'AveriaLibre-Regular',
-  },
-  top: {
-    flexDirection: 'row',
-    backgroundColor: '#2B1D62',
-    alignItems: 'center',
-    paddingTop: 15,
-    paddingBottom: 15,
-    paddingLeft: 20,
-  },
-  arrow: {
-    width: 20,
-    height: 20,
-    marginRight: 20,
-  },
-  title: {
-    fontSize: 20,
-    color: '#fff',
   },
   label: {
     color: '#fff',
     fontSize: 16,
+    fontFamily: 'AveriaLibre-Regular',
   },
   input: {
     height: 35,
     borderColor: '#ccc',
     backgroundColor: '#fff',
     width: '100%',
+    fontFamily: 'AveriaLibre-Regular',
   },
   dateInputContainer: {
     flexDirection: 'row',
@@ -124,6 +99,7 @@ const styles = {
   imageText: {
     color: '#939393',
     fontSize: 10,
+    fontFamily: 'AveriaLibre-Regular',
   },
   image: {
     width: 100,
@@ -139,6 +115,7 @@ const styles = {
   text: {
     color: '#fff',
     fontSize: 16,
+    fontFamily: 'AveriaLibre-Regular',
   },
   alert: {
     color: '#FD7979',
