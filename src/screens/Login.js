@@ -9,12 +9,10 @@ const Login = (props) => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleEmailChange = (text) => {
-    setEmail(text); // Atualiza o estado do e-mail
-  
-    // Só executa a validação se 'text' não estiver vazio
+    setEmail(text); 
     if (text) {
       const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      if (!re.test(String(text).toLowerCase())) {
+      if (!re.test(String(email).toLowerCase())) {
         setErrorMessage("E-mail e/ou senhas inválidos");
         return;
       } else {
