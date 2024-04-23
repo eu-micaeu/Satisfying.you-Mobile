@@ -14,10 +14,6 @@ const AcoesPesquisa = (props) => {
     props.navigation.navigate('Modificar Pesquisa');
   }
 
-  goToHome = () => {
-    props.navigation.navigate('Home');
-  }
-
   return (
       <View style={styles.container}>
         <View style={styles.columnContainer}>
@@ -27,7 +23,7 @@ const AcoesPesquisa = (props) => {
           </Pressable>
           <Pressable style={styles.itemContainer} onPress={goToColeta}>
             <Image source={require('../images/ColetarDados.png')} style={styles.image} />
-            <Text style={styles.text}>ColetarDados</Text>
+            <Text style={styles.text}>Coletar Dados</Text>
           </Pressable>
           <Pressable style={styles.itemContainer} onPress={goToRelatorio}>
             <Image source={require('../images/Relatorio.png')} style={styles.image} />
@@ -44,30 +40,32 @@ const styles = {
     flex: 1,
     backgroundColor: '#372775',
     alignItems: 'center',
+    justifyContent: 'center',
   },
 
   columnContainer: {
+    width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-evenly',
   },
 
   itemContainer: {
     backgroundColor: '#312464',
-    padding: 30,
-    width: 180,
+    padding: 20,
+    width: 120,
     alignItems: 'center',
-    margin: 30,
+    margin: 8,
   },
 
   image: {
-    width: 70,
-    height: 70,
+    width: 50,
+    height: 50,
     marginBottom: 10
   },
 
   text: {
     color: 'white',
-    fontSize: 18,
+    fontSize: 12,
     fontFamily: 'AveriaLibre-Regular',
   }
 

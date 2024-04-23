@@ -79,6 +79,7 @@ const App = () => {
           <Stack.Screen 
             name="Nova Pesquisa"
             component={NovaPesquisa} 
+            options={{headerShown: false}}
           />
 
           <Stack.Screen 
