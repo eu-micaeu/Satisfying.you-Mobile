@@ -73,17 +73,17 @@ const styles = {
   container: {
     flex: 1,
     padding: 20,
+    paddingTop: 5,
     backgroundColor: '#372775',
-    paddingTop: 50,
     fontFamily: 'AveriaLibre-Regular',
   },
   top: {
     flexDirection: 'row',
-    padding: 20,
     backgroundColor: '#2B1D62',
     alignItems: 'center',
-    paddingTop: 17,
-    paddingBottom: 17,
+    paddingTop: 15,
+    paddingBottom: 15,
+    paddingLeft: 20,
   },
   arrow: {
     width: 20,
@@ -97,33 +97,29 @@ const styles = {
   label: {
     color: '#fff',
     fontSize: 16,
-    marginTop: 10,
   },
   input: {
-    height: 40,
+    height: 35,
     borderColor: '#ccc',
-    borderWidth: 1,
     backgroundColor: '#fff',
-    padding: 10,
     width: '100%',
   },
   dateInputContainer: {
     flexDirection: 'row',
   },
   calendar: {
-    width: 30,
-    height: 30,
+    width: 25,
+    height: 25,
     position: 'relative',
-    right: 38,
-    top: 5,
+    right: 33,
+    top: 4,
   },
   imageButton: {
     backgroundColor: '#fff',
-    paddingTop: 25,
-    paddingBottom: 25,
+    padding: 20,
     width: 180,
     alignItems: 'center',
-    marginBottom: 30,
+    marginBottom: 10,
   },
   imageText: {
     color: '#939393',
@@ -147,7 +143,7 @@ const styles = {
   alert: {
     color: '#FD7979',
     fontSize: 12,
-    marginBottom: 5,  
+    marginBottom: 4,  
   }
 };
 
