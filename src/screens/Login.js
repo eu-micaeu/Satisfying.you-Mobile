@@ -25,21 +25,15 @@ const Login = (props) => {
   
 
   const goToRecuperarSenha = () => {
-
     props.navigation.navigate('Recuperar Senha')
-
   }
 
   const goToNovaConta = () => {
-
     props.navigation.navigate('Nova Conta')
-
   }
 
   const goToDrawer = () => {
-
     props.navigation.navigate('Drawer')
-
   }
 
   return (
@@ -54,7 +48,7 @@ const Login = (props) => {
 
         </View>
 
-        <Text style={styles.text}>E-mail</Text>
+        <Text style={styles.label}>E-mail</Text>
 
         <TextInput
           style={styles.textInput}
@@ -62,15 +56,16 @@ const Login = (props) => {
           placeholderTextColor='#3F92C5'
           onChangeText={handleEmailChange}
           keyboardType="email-address"
+          showsVerticalScrollIndicator={false}
         />
 
         {errorMessage && (
-          <Text style={{ fontSize: 15, color: '#FD7979', fontFamily: 'AveriaLibre-Regular' }}>
+          <Text style={{ fontSize: 12, color: '#FD7979', fontFamily: 'AveriaLibre-Regular' }}>
             {errorMessage}
           </Text>
         )}
 
-        <Text style={styles.text}>Senha</Text>
+        <Text style={styles.label}>Senha</Text>
 
         <TextInput
           style={styles.textInput}
@@ -101,6 +96,7 @@ const styles = StyleSheet.create({
   },
 
   logoContainer: {
+    marginTop:10,
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -120,41 +116,56 @@ const styles = StyleSheet.create({
 
   text: {
     color: '#fff',
-    fontSize: 14,
+    fontSize: 12,
     textAlign: 'left',
     width: 300,
     fontFamily: 'AveriaLibre-Bold',
   },
+  label: {
+    color: '#fff',
+    fontSize: 13,
+    textAlign: 'left',
+    width: 450,
+    fontFamily: 'AveriaLibre-Bold',
+  },
 
   textInput: {
+    marginTop:0,
     backgroundColor: '#fff',
-    fontSize: 20,
-    width: 300,
-    height: 40,
+    fontSize: 12,
+    width: 450,
+    height: 30,
     fontFamily: 'AveriaLibre-Regular',
     color: '#3F92C5'
   },
 
   buttonEntrar: {
-    width: 300,
+    width: 450,
+    marginTop:10,
+    height:35,
+    marginBottom:15,
     backgroundColor: '#37BD6D',
     borderRadius: 0,
   },
   buttonCriar: {
-    width: 300,
+    width: 450,
+    height:30,
+    marginBottom:3,
     backgroundColor: '#419ED7',
     borderRadius: 0,
+    padding:0,
   },
   buttonEsqueci: {
-    width: 300,
+    width: 450,
+    height:30,
     backgroundColor: '#B0CCDE',
     borderRadius: 0,
   },
   buttonText: {
     color: '#fff',
     fontFamily: 'AveriaLibre-Regular',
-    fontSize: 14,
-    textAlign: 'center',
+    fontSize: 13,
+    fontWeight:'bold',
   },
 });
 
