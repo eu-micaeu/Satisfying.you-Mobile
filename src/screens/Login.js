@@ -71,12 +71,6 @@ const Login = (props) => {
           showsVerticalScrollIndicator={false}
         />
 
-        {errorMessage && (
-          <Text style={{ fontSize: 12, color: '#FD7979', fontFamily: 'AveriaLibre-Regular' }}>
-            {errorMessage}
-          </Text>
-        )}
-
         <Text style={styles.label}>Senha</Text>
 
         <TextInput
@@ -85,6 +79,12 @@ const Login = (props) => {
           secureTextEntry={true}
           onChangeText={handleSenhaChange}
         />
+
+        {errorMessage && (
+          <Text style={{ fontSize: 13, color: '#FD7979', fontFamily: 'AveriaLibre-Regular' }}>
+            {errorMessage}
+          </Text>
+        )}
 
         <Button onPress={handleLogin} style={styles.buttonEntrar} disabled={isButtonDisabled} ><Text style={styles.buttonText} >Entrar</Text></Button>
 
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
   },
   label: {
     color: '#fff',
-    fontSize: 13,
+    fontSize: 15,
     textAlign: 'left',
     width: 450,
     fontFamily: 'AveriaLibre-Bold',
@@ -143,9 +143,11 @@ const styles = StyleSheet.create({
 
   textInput: {
     backgroundColor: '#fff',
-    fontSize: 12,
+    fontSize: 17,
     width: 450,
-    height: 40,
+    height: 42,
+    paddingTop:0,
+    paddingBottom:0,
     fontFamily: 'AveriaLibre-Regular',
     color: '#3F92C5'
   },
@@ -154,7 +156,7 @@ const styles = StyleSheet.create({
     width: 450,
     marginTop:5,
     height:35,
-    marginBottom:5,
+    marginBottom:10,
     backgroundColor: '#37BD6D',
     borderRadius: 0,
   },
