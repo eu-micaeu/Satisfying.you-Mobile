@@ -7,7 +7,7 @@ const NovaPesquisa = (props) => {
   const [dataPesquisaError, setDataPesquisaError] = useState('');
 
   const goToHome = () => {
-    props.navigation.navigate('Home');
+    props.navigation.navigate('Drawer');
   }
 
   const handleCadastro = () => {

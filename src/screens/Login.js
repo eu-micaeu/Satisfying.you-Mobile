@@ -5,24 +5,27 @@ import { Button } from 'react-native-paper'
 const Login = (props) => {
 
   const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
 
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, seterrorMessage] = useState('');
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+
 
   const handleEmailChange = (text) => {
     setEmail(text); 
-    if (text) {
-      const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      if (!re.test(String(email).toLowerCase())) {
-        setErrorMessage("E-mail e/ou senhas inválidos");
-        return;
-      } else {
-        setErrorMessage("");
-      }
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (!re.test(String(email).toLowerCase())) {
+      seterrorMessage("E-mail inválido");
+      setIsButtonDisabled(true);
     } else {
-      setErrorMessage("");
+      seterrorMessage("");
+      setIsButtonDisabled(false);
     }
   }
   
+  const handleSenhaChange = (text) => {
+    setSenha(text);
+  }
 
   const goToRecuperarSenha = () => {
     props.navigation.navigate('Recuperar Senha')
@@ -35,6 +38,15 @@ const Login = (props) => {
   const goToDrawer = () => {
     props.navigation.navigate('Drawer')
   }
+
+  const handleLogin = () => {
+    if (!email.trim()|| !senha.trim()) {
+      seterrorMessage('Preencha todos os dados');
+    } else {
+      seterrorMessage('')
+      goToDrawer();
+    }
+  };
 
   return (
 
@@ -52,7 +64,7 @@ const Login = (props) => {
 
         <TextInput
           style={styles.textInput}
-          placeholder='jurandir.pereira@hotmail.com'
+          placeholder="exemplo@hotmail.com"
           placeholderTextColor='#3F92C5'
           onChangeText={handleEmailChange}
           keyboardType="email-address"
@@ -69,12 +81,12 @@ const Login = (props) => {
 
         <TextInput
           style={styles.textInput}
-          placeholder='********'
           placeholderTextColor='#3F92C5'
           secureTextEntry={true}
+          onChangeText={handleSenhaChange}
         />
 
-        <Button onPress={goToDrawer} style={styles.buttonEntrar}><Text style={styles.buttonText}>Entrar</Text></Button>
+        <Button onPress={handleLogin} style={styles.buttonEntrar} disabled={isButtonDisabled} ><Text style={styles.buttonText} >Entrar</Text></Button>
 
         <Button onPress={goToNovaConta} style={styles.buttonCriar}><Text style={styles.buttonText}>Criar minha conta</Text></Button>
 

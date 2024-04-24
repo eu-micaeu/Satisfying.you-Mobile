@@ -7,14 +7,17 @@ const NovaConta = (props) => {
   const [senha2, setSenha2] = useState('');
   const [errorMessageEmail, setErrorMessageEmail] = useState('');
   const [errorMessageSenha, setErrorMessageSenha] = useState('');
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   const handleEmail = (text) => {
     setEmail(text);
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (!re.test(String(text).toLowerCase())) {
       setErrorMessageEmail("E-mail inválido");
+      setIsButtonDisabled(true);
     } else {
       setErrorMessageEmail("");
+      setIsButtonDisabled(false);
     }
   };
 
@@ -29,13 +32,12 @@ const NovaConta = (props) => {
   };
 
 
-
   const cadastrarConta = () => {
     if (senha1 !== senha2) {
       setErrorMessageSenha("As senhas não coincidem.");
-    } else if (senha1.trim() === "" || senha2.trim() === "") {
-      setErrorMessageSenha('Preencha os campos de senha');
-    }else{
+    } else if (!senha1.trim()|| !senha2.trim() || !email.trim()) {
+      setErrorMessageSenha('Preencha todos os campos.');
+    }else {
       goToLogin();
     }
   };
@@ -49,7 +51,7 @@ const NovaConta = (props) => {
       <Text style={styles.text}>E-mail</Text>
       <TextInput
         style={styles.textInput}
-        placeholder="jurandir.pereira@hotmail.com"
+        placeholder="exemplo@hotmail.com"
         placeholderTextColor="#3F92C5"
         onChangeText={handleEmail}
         keyboardType="email-address"
@@ -64,7 +66,6 @@ const NovaConta = (props) => {
       <TextInput
         style={styles.textInput}
         secureTextEntry={true}
-        placeholder="*********"
         placeholderTextColor="#3F92C5"
         onChangeText={handleSenha1}
       />
@@ -83,7 +84,7 @@ const NovaConta = (props) => {
         </Text>
       )}
 
-      <Pressable onPress={cadastrarConta} style={styles.buttonCadastrar}>
+      <Pressable onPress={cadastrarConta} style={styles.buttonCadastrar} disabled={isButtonDisabled}>
         <Text style={styles.buttonText}>CADASTRAR</Text>
       </Pressable>
     </View>

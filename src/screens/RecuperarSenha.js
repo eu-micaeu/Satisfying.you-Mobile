@@ -5,6 +5,7 @@ const RecuperarSenha = (props) => {
   
   const [email, setEmail] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   const handleEmailChange = text => {
     setEmail(text);
@@ -12,10 +13,10 @@ const RecuperarSenha = (props) => {
       /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (!re.test(String(email).toLowerCase())) {
       setErrorMessage('E-mail parece ser inválido');
-      return;
+      setIsButtonDisabled(true);
     } else {
       setErrorMessage("");
-      return;
+      setIsButtonDisabled(false);
     }
   };
 
@@ -23,12 +24,20 @@ const RecuperarSenha = (props) => {
     props.navigation.navigate('Login');
   }
 
+  const handleRecuperarSenha = () => {
+    if(!email.trim()){
+      setErrorMessage("Email vazio")
+    } else{
+      goToLogin();
+    }
+  }
+
     return (
       <View style={styles.body}>
         <Text style={styles.text}>E-mail</Text>
         <TextInput
             style={styles.textInput}
-            placeholder="jurandir.pereira@hotmail.com"
+            placeholder="exemplo@hotmail.com"
           placeholderTextColor='#419ED7'
           onChangeText={handleEmailChange}
         ></TextInput>
@@ -39,7 +48,7 @@ const RecuperarSenha = (props) => {
           </Text>
         )}
 
-        <Pressable onPress={goToLogin} style={styles.buttonEntrar}>
+        <Pressable onPress={handleRecuperarSenha} style={styles.buttonEntrar} disabled={isButtonDisabled}>
           <Text style={styles.buttonText}>RECUPERAR</Text>
         </Pressable>
       </View>
