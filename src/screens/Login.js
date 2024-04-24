@@ -59,12 +59,6 @@ const Login = (props) => {
           showsVerticalScrollIndicator={false}
         />
 
-        {errorMessage && (
-          <Text style={{ fontSize: 13, color: '#FD7979', fontFamily: 'AveriaLibre-Regular' }}>
-            {errorMessage}
-          </Text>
-        )}
-
         <Text style={styles.label}>Senha</Text>
 
         <TextInput
@@ -73,6 +67,12 @@ const Login = (props) => {
           placeholderTextColor='#3F92C5'
           secureTextEntry={true}
         />
+
+        {errorMessage && (
+          <Text style={{ fontSize: 13, color: '#FD7979', fontFamily: 'AveriaLibre-Regular' }}>
+            {errorMessage}
+          </Text>
+        )}
 
         <Button onPress={goToDrawer} style={styles.buttonEntrar}><Text style={styles.buttonText}>Entrar</Text></Button>
 
@@ -144,14 +144,13 @@ const styles = StyleSheet.create({
     width: 450,
     marginTop:5,
     height:35,
-    marginBottom:5,
+    marginBottom:10,
     backgroundColor: '#37BD6D',
     borderRadius: 0,
   },
   buttonCriar: {
     width: 450,
     height:35,
-    marginTop:12,
     backgroundColor: '#419ED7',
     borderRadius: 0,
   },
