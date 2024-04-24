@@ -60,7 +60,7 @@ const Login = (props) => {
         />
 
         {errorMessage && (
-          <Text style={{ fontSize: 12, color: '#FD7979', fontFamily: 'AveriaLibre-Regular' }}>
+          <Text style={{ fontSize: 13, color: '#FD7979', fontFamily: 'AveriaLibre-Regular' }}>
             {errorMessage}
           </Text>
         )}
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
   },
   label: {
     color: '#fff',
-    fontSize: 13,
+    fontSize: 15,
     textAlign: 'left',
     width: 450,
     fontFamily: 'AveriaLibre-Bold',
@@ -131,9 +131,11 @@ const styles = StyleSheet.create({
 
   textInput: {
     backgroundColor: '#fff',
-    fontSize: 12,
+    fontSize: 17,
     width: 450,
-    height: 40,
+    height: 42,
+    paddingTop:0,
+    paddingBottom:0,
     fontFamily: 'AveriaLibre-Regular',
     color: '#3F92C5'
   },
@@ -149,6 +151,7 @@ const styles = StyleSheet.create({
   buttonCriar: {
     width: 450,
     height:35,
+    marginTop:12,
     backgroundColor: '#419ED7',
     borderRadius: 0,
   },
