@@ -14,12 +14,16 @@ const Login = (props) => {
   const handleEmailChange = (text) => {
     setEmail(text); 
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (!re.test(String(email).toLowerCase())) {
-      seterrorMessage("E-mail inválido");
-      setIsButtonDisabled(true);
-    } else {
+    if(text){
+      if (!re.test(String(email).toLowerCase())) {
+        seterrorMessage("E-mail e/ou senha inválidos");
+        setIsButtonDisabled(true);
+      }else {
+        seterrorMessage("");
+        setIsButtonDisabled(false);
+      }
+    }else{
       seterrorMessage("");
-      setIsButtonDisabled(false);
     }
   }
   
@@ -64,7 +68,7 @@ const Login = (props) => {
 
         <TextInput
           style={styles.textInput}
-          placeholder="exemplo@hotmail.com"
+          placeholder="jurandir.pereira@hotmail.com"
           placeholderTextColor='#3F92C5'
           onChangeText={handleEmailChange}
           keyboardType="email-address"
@@ -75,13 +79,14 @@ const Login = (props) => {
 
         <TextInput
           style={styles.textInput}
+          placeholder="********"
           placeholderTextColor='#3F92C5'
           secureTextEntry={true}
           onChangeText={handleSenhaChange}
         />
 
         {errorMessage && (
-          <Text style={{ fontSize: 13, color: '#FD7979', fontFamily: 'AveriaLibre-Regular' }}>
+          <Text style={{ textAlign:'left', fontSize: 13, color: '#FD7979', fontFamily: 'AveriaLibre-Regular' }}>
             {errorMessage}
           </Text>
         )}
