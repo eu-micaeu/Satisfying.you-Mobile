@@ -7,11 +7,7 @@ const ModificarPesquisa = (props) => {
   const [showPopUp, setShowPopUp] = useState(false);
 
   const goToHome = () => {
-    props.navigation.navigate('Home');
-  }
-
-  const goToAcoesPesquisa = () => {
-    props.navigation.navigate('AcoesPesquisa');
+    props.navigation.navigate('Drawer');
   }
 
   const togglePopUp = () => {

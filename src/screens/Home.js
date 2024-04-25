@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, Image, Pressable } from 'react-native';
-import { TextInput, Card } from 'react-native-paper';
+import { TextInput } from 'react-native-paper';
+import CustomCard from '../components/CustomCard';
 
 const Home = (props) => {
 
@@ -26,17 +27,13 @@ const Home = (props) => {
       </View>
       <Pressable onPress={goToAcoesPesquisa} style={styles.containerCards}>
         {cards.map((card, index) => (
-          <Pressable key={index} onPress={goToAcoesPesquisa}>
-            <Card style={styles.card}>
-              <View style={styles.cardImageContainer}>
-                <Card.Cover source={card.capa} style={styles.cardImage} />
-              </View>
-              <Card.Content>
-                <Text style={styles.title}>{card.nome}</Text>
-                <Text style={styles.subtitle}>{card.data}</Text>
-              </Card.Content>
-            </Card>
-          </Pressable>
+          <CustomCard 
+          key={index} 
+          onPress={goToAcoesPesquisa} 
+          capa={card.capa} 
+          nome={card.nome} 
+          data={card.data} 
+        />
         ))}
       </Pressable>
       <Pressable onPress={goToNovaPesquisa} style={styles.buttonNovaPesquisa}>
