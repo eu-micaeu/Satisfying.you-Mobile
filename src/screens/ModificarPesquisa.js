@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, Modal, TouchableOpacity, TextInput, Pressable } from 'react-native';
+import { View, Text, StyleSheet, Image, Modal, TouchableOpacity, TextInput } from 'react-native';
 import { Button } from 'react-native-paper';
 
 const ModificarPesquisa = (props) => {
@@ -10,10 +10,6 @@ const ModificarPesquisa = (props) => {
     props.navigation.navigate('Home');
   }
 
-  const goToAcoesPesquisa = () => {
-    props.navigation.navigate('AcoesPesquisa');
-  }
-
   const togglePopUp = () => {
     setShowPopUp(!showPopUp);
   }
@@ -22,14 +18,19 @@ const ModificarPesquisa = (props) => {
     <View style={styles.body}>
 
       <Text style={styles.text}>Nome:</Text>
+      
       <TextInput style={styles.textInput} placeholder='Carnaval 2024'></TextInput>
 
       <Text style={styles.text}>Data:</Text>
+
       <TextInput style={styles.textInput} placeholder='16/02/2024'></TextInput>
 
       <View style={styles.containerImagem}>
+
         <Text style={styles.text}>Imagem:</Text>
+
         <TextInput style={styles.textInputImagem}></TextInput>
+
       </View>
 
       <Button style={styles.buttonSalvar} onPress={goToHome}><Text style={styles.buttonSalvarText}>Salvar</Text></Button>
