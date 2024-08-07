@@ -1,18 +1,26 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Pressable, Image } from 'react-native';
+import { collection, addDoc, initializeFirestore } from "firebase/firestore";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { launchImageLibrary } from 'react-native-image-picker';
+import app from "../config/firebase";
 
 const NovaPesquisa = (props) => {
   const [nomePesquisa, setNomePesquisa] = useState('');
   const [dataPesquisa, setDataPesquisa] = useState('');
   const [nomePesquisaError, setNomePesquisaError] = useState('');
   const [dataPesquisaError, setDataPesquisaError] = useState('');
+  const [image, setImage] = useState(null); // State para armazenar a imagem
+
+  const db = initializeFirestore(app, {experimentalForceLongPolling: true});
+  const storage = getStorage(app);
+  const pesquisaCollection = collection(db, 'pesquisas');
 
   const goToHome = () => {
     props.navigation.navigate('Drawer');
-  }
+  };
 
-  const handleCadastro = () => {
-    // Verificar se os campos estão vazios
+  const handleCadastro = async () => {
     if (!nomePesquisa.trim()) {
       setNomePesquisaError('Preencha o nome da pesquisa');
     } else {
@@ -23,41 +31,69 @@ const NovaPesquisa = (props) => {
     } else {
       setDataPesquisaError('');
     }
-    //Se os nomes não estiverem vazios, ir para a Home
+
     if (nomePesquisa.trim() && dataPesquisa.trim()) {
-      goToHome();
+      let imageUrl = null;
+
+      if (image) {
+        const response = await fetch(image.uri);
+        const blob = await response.blob();
+        const imageRef = ref(storage, `pesquisas/${Date.now()}_${image.fileName}`);
+        await uploadBytes(imageRef, blob);
+        imageUrl = await getDownloadURL(imageRef);
+      }
+
+      const novaPesquisa = {
+        nome: nomePesquisa,
+        data: dataPesquisa,
+        imagem: imageUrl,
+      };
+
+      addDoc(pesquisaCollection, novaPesquisa).then(() => {
+        goToHome();
+      }).catch((error) => {
+        console.error("Erro ao adicionar a pesquisa: ", error);
+      });
     }
   };
 
+  const handleImagePicker = () => {
+    launchImageLibrary({}, (response) => {
+      if (response.assets && response.assets.length > 0) {
+        setImage(response.assets[0]);
+      }
+    });
+  };
+
   return (
-    <>
-      <View style={styles.container}>
-        <Text style={styles.label}>Nome</Text>
+    <View style={styles.container}>
+      <Text style={styles.label}>Nome</Text>
+      <TextInput
+        style={styles.input}
+        value={nomePesquisa}
+        onChangeText={text => setNomePesquisa(text)}
+      />
+      {!!nomePesquisaError && <Text style={styles.alert}>{nomePesquisaError}</Text>}
+      <Text style={styles.label}>Data</Text>
+      <View style={styles.dateInputContainer}>
         <TextInput
           style={styles.input}
-          value={nomePesquisa}
-          onChangeText={text => setNomePesquisa(text)}
+          value={dataPesquisa}
+          onChangeText={text => setDataPesquisa(text)}
+          placeholder='DD/MM/AAAA'
+          keyboardType='numeric'
         />
-        {!!nomePesquisaError && <Text style={styles.alert}>{nomePesquisaError}</Text>}
-        <Text style={styles.label}>Data</Text>
-        <View style={styles.dateInputContainer}>
-          <TextInput
-            style={styles.input}
-            value={dataPesquisa}
-            onChangeText={text => setDataPesquisa(text)}
-          />
-          <Image style={styles.calendar} source={require('../images/icon.png')} />
-        </View>
-        {!!dataPesquisaError && <Text style={styles.alert}>{dataPesquisaError}</Text>}
-        <Text style={styles.label}>Imagem</Text>
-        <Pressable style={styles.imageButton}>
-          <Text style={styles.imageText}>Câmera/Galeria de imagens</Text>
-        </Pressable>
-        <Pressable style={styles.button} onPress={handleCadastro}>
-          <Text style={styles.text}>CADASTRAR</Text>
-        </Pressable>
+        <Image style={styles.calendar} source={require('../images/icon.png')} />
       </View>
-    </>
+      {!!dataPesquisaError && <Text style={styles.alert}>{dataPesquisaError}</Text>}
+      <Text style={styles.label}>Imagem</Text>
+      <Pressable style={styles.imageButton} onPress={handleImagePicker}>
+        {image && <Image source={{ uri: image.uri }} style={styles.image} />}
+      </Pressable>
+      <Pressable style={styles.button} onPress={handleCadastro}>
+        <Text style={styles.text}>CADASTRAR</Text>
+      </Pressable>
+    </View>
   );
 };
 
@@ -92,8 +128,8 @@ const styles = {
   },
   imageButton: {
     backgroundColor: '#fff',
-    padding: 20,
     width: 180,
+    height: 100,
     alignItems: 'center',
     marginBottom: 10,
   },
@@ -121,7 +157,7 @@ const styles = {
   alert: {
     color: '#FD7979',
     fontSize: 12,
-    marginBottom: 4,  
+    marginBottom: 4,
   }
 };
 
