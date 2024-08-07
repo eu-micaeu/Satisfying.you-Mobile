@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Pressable, Image } from 'react-native';
+
 const NovaPesquisa = (props) => {
   const [nomePesquisa, setNomePesquisa] = useState('');
   const [dataPesquisa, setDataPesquisa] = useState('');

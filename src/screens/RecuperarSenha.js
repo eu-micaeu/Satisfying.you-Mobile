@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import {View, Text, TextInput, StyleSheet, Pressable} from 'react-native';
+import { useSelector } from 'react-redux';
 
 const RecuperarSenha = (props) => {
   
-  const [email, setEmail] = useState('');
+  const email = useSelector((state)=>state.login.email);
+  //const [email, setEmail] = useState('')
   const [errorMessage, setErrorMessage] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 

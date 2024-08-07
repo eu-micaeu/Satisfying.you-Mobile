@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, Image, TextInput} from 'react-native'
 import { Button } from 'react-native-paper'
+import { useDispatch } from 'react-redux';
+import { reducerSetLogin } from '../../redux/loginSlice';
 
 const Login = (props) => {
 
@@ -10,6 +12,7 @@ const Login = (props) => {
   const [errorMessage, seterrorMessage] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
+  const dispatch = useDispatch();
 
   const handleEmailChange = (text) => {
     setEmail(text); 
@@ -21,6 +24,7 @@ const Login = (props) => {
       }else {
         seterrorMessage("");
         setIsButtonDisabled(false);
+        dispatch(reducerSetLogin({email: email}));
       }
     }else{
       seterrorMessage("");
