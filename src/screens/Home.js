@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, Pressable,FlatList, TouchableOpacity } from 'react-native';
 import { TextInput } from 'react-native-paper';
-import CustomCard from '../components/CustomCard';
+import NovaPesquisa from './NovaPesquisa';
 import app from "../config/firebase";
 import { collection, addDoc, initializeFirestore, onSnapshot, query} from 'firebase/firestore';
 const Home = (props) => {
@@ -13,13 +13,13 @@ const Home = (props) => {
     props.navigation.navigate('Ações da Pesquisa')
   }
 
-  const cards = [
+  /*const cards = [
     { capa: require("../images/secomp.png"), nome: "SECOMP 2023", data: "10/10/2023" },
     { capa: require("../images/ubuntu.png"), nome: "UBUNTU 2022", data: "05/06/2022" },
     { capa: require("../images/Meninas.png"), nome: "MENINAS CPU", data: "01/04/2022"  },
     { capa: require("../images/COTB.png"), nome: "COTB", data: "01/04/2022" }
 
-  ]
+  ]*/
   const [listaPesquisas, setListaPesquisas] = useState();
   //const navigation = useNavigation();
 
@@ -40,8 +40,9 @@ const Home = (props) => {
     })
     return () => unsubscribe();
   },[]);
+
     const itemPesquisa= ({item})=>{
-      <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('AcoesPesquisa', { id: item.idPesquisa })}>
+      <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('AcoesPesquisa', { id: item.id})}>
       <Text style={styles.title}>{item.nomePesquisa}</Text>
       <Text style={styles.subtitle}>{item.dataPesquisa}</Text>
       <Image source={{ uri: item.imagUrl }} style={styles.cardImage} />
@@ -51,25 +52,14 @@ const Home = (props) => {
 
   return (
     <View style={styles.body}>
-      <View style={styles.containerCards}>
-        <FlatList data={listaPesquisas} renderItem={itemPesquisa}></FlatList>
-      </View>
       <View style={styles.viewTextInput}>
         <Image source={require('../images/pesquisa.png')} />
         <TextInput style={styles.textInput} placeholder='Insira o termo da busca...' />
       </View>
-      
-      <Pressable onPress={goToAcoesPesquisa} style={styles.containerCards}>
-        {cards.map((card, index) => (
-          <CustomCard 
-          key={index} 
-          onPress={goToAcoesPesquisa} 
-          capa={card.capa} 
-          nome={card.nome} 
-          data={card.data} 
-        />
-        ))}
-      </Pressable>
+      <View style={styles.containerCards}>
+        <FlatList data={listaPesquisas} renderItem={itemPesquisa}></FlatList>
+      </View>
+
       <Pressable onPress={goToNovaPesquisa} style={styles.buttonNovaPesquisa}>
         <Text style={styles.buttonNovaPesquisaText}>Nova Pesquisa</Text>
       </Pressable>

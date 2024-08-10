@@ -1,9 +1,19 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, Modal, TouchableOpacity, TextInput, Pressable } from 'react-native';
+import { View, Text, StyleSheet, Image, Modal, TouchableOpacity, TextInput } from 'react-native';
 import { Button } from 'react-native-paper';
-import { updateDoc,doc} from 'firebase/firestore';
-const ModificarPesquisa = (props) => {
+import { updateDoc,doc, ref, uploadBytes, getDownloadURL } from 'firebase/firestore';
+import { collection, initializeFirestore } from "firebase/firestore";
 
+
+const db = initializeFirestore(app, {experimentalForceLongPolling: true});
+
+const [novoNome, setNovoNome] = useState('');
+const [novaData, setNovaData] = useState('');
+const [novaImagem, setNovaImagem] = useState('');
+const [nomePesquisaError, setNomePesquisaError] = useState('');
+const [dataPesquisaError, setDataPesquisaError] = useState('');
+
+const ModificarPesquisa = (props) => {
   const [showPopUp, setShowPopUp] = useState(false);
 
   const goToHome = () => {
@@ -13,33 +23,67 @@ const ModificarPesquisa = (props) => {
   const togglePopUp = () => {
     setShowPopUp(!showPopUp);
   }
-  const db = initializeFirestore(app, {experimentalForceLongPolling: true});
-  const pesquisaCollection = collection(db, 'pesquisas');
 
-  const changePesquisa = (id) =>{
-    const pesRef = doc(db,"pesquisas",id)
 
-    updateDoc(pesRef,{
-      
+const editarPesquisa = async (id, pesquisaAtualizada) =>{
+  if (!novoNome.trim()) {
+    setNomePesquisaError('Preencha o nome da pesquisa');
+  } else {
+    setNomePesquisaError('');
+  }
+  if (!novaData.trim()) {
+    setDataPesquisaError('Preencha a data da pesquisa');
+  } else {
+    setDataPesquisaError('');
+  }
+  const pesRef = doc(db,"pesquisas",id)
+  let imageUrl = null;
+  if (nomePesquisa.trim() && dataPesquisa.trim()) {
+    if (novaImagem) {
+      const response = await fetch(novaImagem.uri);
+      const blob = await response.blob();
+      const imageRef = ref(storage, `pesquisas/${Date.now()}_${image.fileName}`);
+      await uploadBytes(imageRef, blob);
+      imageUrl = await getDownloadURL(imageRef);
     }
-    
-    )
+    updateDoc(pesRef,{
+      novoNome: pesquisaAtualizada.nomePesquisa,
+      novaData: pesquisaAtualizada.dataPesquisa,
+      novaImg: imageUrl
+    })
+    goToHome()
+  }
+
+}
+  const deletarPesquisa = (id) =>{
+    deleteDoc(doc(db,"pesquisas",id))
+    goToHome()
   }
   return (
     <View style={styles.body}>
 
       <Text style={styles.text}>Nome:</Text>
-      <TextInput style={styles.textInput} placeholder='Carnaval 2024'></TextInput>
+      <TextInput 
+        style={styles.textInput}
+        placeholder='Carnaval 2024'
+        value={novoNome}
+        onChangeText={text => setNovoNome(text)}/>
 
       <Text style={styles.text}>Data:</Text>
-      <TextInput style={styles.textInput} placeholder='16/02/2024'></TextInput>
+      <TextInput 
+        style={styles.textInput}
+        placeholder='16/02/2024'
+        value={novaData}
+        onChangeText={text => setNovaData(text)}/>
 
       <View style={styles.containerImagem}>
         <Text style={styles.text}>Imagem:</Text>
-        <TextInput style={styles.textInputImagem}></TextInput>
+        <TextInput 
+          style={styles.textInputImagem}
+        />
       </View>
 
-      <Button style={styles.buttonSalvar} onPress={goToHome}><Text style={styles.buttonSalvarText}>Salvar</Text></Button>
+      <Button style={styles.buttonSalvar} onPress={editarPesquisa}><Text style={styles.buttonSalvarText}>Salvar</Text></Button>
 
       <TouchableOpacity onPress={togglePopUp} style={styles.apagar}>
 
@@ -59,7 +103,7 @@ const ModificarPesquisa = (props) => {
 
             <View style={styles.divOptions}>
 
-              <Button style={styles.optionSim} onPress={goToHome} ><Text style={styles.buttonSalvarText}>SIM</Text></Button>
+              <Button style={styles.optionSim} onPress={deletarPesquisa} ><Text style={styles.buttonSalvarText}>SIM</Text></Button>
 
               <Button style={styles.optionNao} onPress={togglePopUp}><Text style={styles.buttonSalvarText}>CANCELAR</Text></Button>
 

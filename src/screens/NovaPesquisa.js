@@ -49,7 +49,7 @@ const NovaPesquisa = (props) => {
         imagem: imageUrl,
       };
 
-      addDoc(pesquisaCollection, novaPesquisa).then(() => {
+      addDoc(pesquisaCollection, novaPesquisa).then((docRef) => {
         goToHome();
       }).catch((error) => {
         console.error("Erro ao adicionar a pesquisa: ", error);
