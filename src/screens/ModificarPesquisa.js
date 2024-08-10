@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, Modal, TouchableOpacity, TextInput, Pressable } from 'react-native';
 import { Button } from 'react-native-paper';
-
+import { updateDoc,doc} from 'firebase/firestore';
 const ModificarPesquisa = (props) => {
 
   const [showPopUp, setShowPopUp] = useState(false);
@@ -13,7 +13,18 @@ const ModificarPesquisa = (props) => {
   const togglePopUp = () => {
     setShowPopUp(!showPopUp);
   }
+  const db = initializeFirestore(app, {experimentalForceLongPolling: true});
+  const pesquisaCollection = collection(db, 'pesquisas');
 
+  const changePesquisa = (id) =>{
+    const pesRef = doc(db,"pesquisas",id)
+
+    updateDoc(pesRef,{
+      
+    }
+    
+    )
+  }
   return (
     <View style={styles.body}>
 

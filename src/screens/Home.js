@@ -1,7 +1,9 @@
-import { View, Text, StyleSheet, Image, Pressable } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, Image, Pressable,FlatList, TouchableOpacity } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import CustomCard from '../components/CustomCard';
-
+import app from "../config/firebase";
+import { collection, addDoc, initializeFirestore, onSnapshot, query} from 'firebase/firestore';
 const Home = (props) => {
 
   goToNovaPesquisa = () => {
@@ -18,13 +20,45 @@ const Home = (props) => {
     { capa: require("../images/COTB.png"), nome: "COTB", data: "01/04/2022" }
 
   ]
+  const [listaPesquisas, setListaPesquisas] = useState();
+  //const navigation = useNavigation();
+
+  const db = initializeFirestore(app, {experimentalForceLongPolling: true});
+  const pesquisaCollection = collection(db, 'pesquisas');
+
+ useEffect( () =>{
+    const q = query(pesquisaCollection);
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const pesquisas =[]
+      snapshot.forEach((doc) =>{
+        pesquisas.push({
+          id: doc.id,
+          ...doc.data()
+        })
+      });
+      setListaPesquisas(pesquisas);
+    })
+    return () => unsubscribe();
+  },[]);
+    const itemPesquisa= ({item})=>{
+      <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('AcoesPesquisa', { id: item.idPesquisa })}>
+      <Text style={styles.title}>{item.nomePesquisa}</Text>
+      <Text style={styles.subtitle}>{item.dataPesquisa}</Text>
+      <Image source={{ uri: item.imagUrl }} style={styles.cardImage} />
+      </TouchableOpacity>
+    }
+
 
   return (
     <View style={styles.body}>
+      <View style={styles.containerCards}>
+        <FlatList data={listaPesquisas} renderItem={itemPesquisa}></FlatList>
+      </View>
       <View style={styles.viewTextInput}>
         <Image source={require('../images/pesquisa.png')} />
         <TextInput style={styles.textInput} placeholder='Insira o termo da busca...' />
       </View>
+      
       <Pressable onPress={goToAcoesPesquisa} style={styles.containerCards}>
         {cards.map((card, index) => (
           <CustomCard 
@@ -42,7 +76,7 @@ const Home = (props) => {
     </View>
 
   )
-}
+};
 
 const styles = StyleSheet.create({
 
