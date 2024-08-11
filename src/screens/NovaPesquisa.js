@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Pressable, Image } from 'react-native';
-import { collection, addDoc, initializeFirestore } from "firebase/firestore";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { collection, addDoc } from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { launchImageLibrary } from 'react-native-image-picker';
-import app from "../config/firebase";
+import { db, storage } from "../config/firebase"; 
 
 const NovaPesquisa = (props) => {
   const [nomePesquisa, setNomePesquisa] = useState('');
   const [dataPesquisa, setDataPesquisa] = useState('');
   const [nomePesquisaError, setNomePesquisaError] = useState('');
   const [dataPesquisaError, setDataPesquisaError] = useState('');
-  const [image, setImage] = useState(null); // State para armazenar a imagem
+  const [image, setImage] = useState(null);
 
-  const db = initializeFirestore(app, {experimentalForceLongPolling: true});
-  const storage = getStorage(app);
   const pesquisaCollection = collection(db, 'pesquisas');
 
   const goToHome = () => {
@@ -21,16 +19,12 @@ const NovaPesquisa = (props) => {
   };
 
   const handleCadastro = async () => {
-    if (!nomePesquisa.trim()) {
-      setNomePesquisaError('Preencha o nome da pesquisa');
-    } else {
-      setNomePesquisaError('');
-    }
-    if (!dataPesquisa.trim()) {
-      setDataPesquisaError('Preencha a data da pesquisa');
-    } else {
-      setDataPesquisaError('');
-    }
+    // Validações
+    if (!nomePesquisa.trim()) setNomePesquisaError('Preencha o nome da pesquisa');
+    else setNomePesquisaError('');
+
+    if (!dataPesquisa.trim()) setDataPesquisaError('Preencha a data da pesquisa');
+    else setDataPesquisaError('');
 
     if (nomePesquisa.trim() && dataPesquisa.trim()) {
       let imageUrl = null;
@@ -43,13 +37,9 @@ const NovaPesquisa = (props) => {
         imageUrl = await getDownloadURL(imageRef);
       }
 
-      const novaPesquisa = {
-        nome: nomePesquisa,
-        data: dataPesquisa,
-        imagem: imageUrl,
-      };
+      const novaPesquisa = { nome: nomePesquisa, data: dataPesquisa, imagem: imageUrl };
 
-      addDoc(pesquisaCollection, novaPesquisa).then((docRef) => {
+      addDoc(pesquisaCollection, novaPesquisa).then(() => {
         goToHome();
       }).catch((error) => {
         console.error("Erro ao adicionar a pesquisa: ", error);

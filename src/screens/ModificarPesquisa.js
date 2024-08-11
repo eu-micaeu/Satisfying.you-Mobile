@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, Modal, TouchableOpacity, TextInput, Pressable } from 'react-native';
 import { Button } from 'react-native-paper';
-import { updateDoc, doc, getFirestore, query, where, getDocs, collection } from 'firebase/firestore';
+import { updateDoc, doc, getFirestore, query, where, getDocs, collection,addDoc,deleteDoc} from 'firebase/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { launchImageLibrary } from 'react-native-image-picker';
 
@@ -30,7 +30,7 @@ const ModificarPesquisa = (props) => {
 
   };
 
-  const editarPesquisa = async (id) => {
+  const editarPesquisa = async (id,novoNome,novaData,image) => {
 
     if (!novoNome.trim()) {
 
@@ -55,26 +55,32 @@ const ModificarPesquisa = (props) => {
 
       try {
 
-        deletarPesquisa(id);
+        //deletarPesquisa(id);
 
         let imageUrl = null;
 
         if (image) {
-          const response = await fetch(image.uri);
-          const blob = await response.blob();
-          const imageRef = ref(storage, `pesquisas/${Date.now()}_${image.fileName}`);
-          await uploadBytes(imageRef, blob);
-          imageUrl = await getDownloadURL(imageRef);
+          try {
+            const response = await fetch(image.uri);
+            const blob = await response.blob();
+            const imageRef = ref(storage, `pesquisas/${Date.now()}_${image.fileName}`);
+            await uploadBytes(imageRef, blob);
+            imageUrl = await getDownloadURL(imageRef);
+          } catch (imageError) {
+            console.error("Erro ao fazer upload da imagem: ", imageError);
+            throw new Error("Falha ao enviar a imagem");
+          }
         }
+        // Referência ao documento que será atualizado
+        const pesRef = doc(db,"pesquisas" ,id);
 
         const novaPesquisa = {
           nome: novoNome,
           data: novaData,
           imagem: imageUrl,
-          id: id,
         };
 
-        addDoc(pesquisaCollection, novaPesquisa).then((docRef) => {
+        /*addDoc(pesquisaCollection, novaPesquisa).then((docRef) => {
           goToHome();
         }).catch((error) => {
           console.error("Erro ao adicionar a pesquisa: ", error);
@@ -84,7 +90,15 @@ const ModificarPesquisa = (props) => {
 
         console.error("Erro ao adicionar a pesquisa: ", error);
 
-      }
+      }*/
+      // Atualiza o documento no Firestore
+      await updateDoc(pesRef, novaPesquisa);
+      console.log("Pesquisa atualizada com sucesso!");
+      goToHome();
+
+    } catch (error) {
+      console.error("Erro ao modificar a pesquisa: ", error);
+    }
 
     }
 
@@ -92,7 +106,7 @@ const ModificarPesquisa = (props) => {
 
 
   const deletarPesquisa = async (id) => {
-    try {
+    /*try {
       const pesquisaCollection = collection(db, 'pesquisas');
       const q = query(pesquisaCollection, where('id', '==', id));
       const querySnapshot = await getDocs(q);
@@ -107,7 +121,9 @@ const ModificarPesquisa = (props) => {
       }
     } catch (error) {
       console.error("Error deleting document:", error);
-    }
+    }*/
+    deleteDoc(doc(db,"pesquisas",id))
+    goToHome();
   };
 
   const handleImagePicker = () => {
