@@ -2,12 +2,13 @@ import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { View, TouchableOpacity, Text, Image } from 'react-native';
 import Home from './Home';
-
 import { StyleSheet } from 'react-native';
+import { useSelector } from 'react-redux';
 
 const DrawerNavigator = createDrawerNavigator();
 
 const Drawer = () => {
+    const email = useSelector((state)=>state.login.email);
 
     return (
 
@@ -15,7 +16,7 @@ const Drawer = () => {
 
             <View style={{ flex: 1 }}>
 
-                <Text style={styles.usuario}>usuario@dominio.com</Text>
+                <Text style={styles.usuario}>{email}</Text>
 
                 <View style={styles.linhaSeparadora}/>
 

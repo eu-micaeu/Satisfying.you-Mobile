@@ -49,7 +49,7 @@ const NovaPesquisa = (props) => {
         imagem: imageUrl,
       };
 
-      addDoc(pesquisaCollection, novaPesquisa).then(() => {
+      addDoc(pesquisaCollection, novaPesquisa).then((docRef) => {
         goToHome();
       }).catch((error) => {
         console.error("Erro ao adicionar a pesquisa: ", error);
@@ -153,6 +153,15 @@ const styles = {
     color: '#fff',
     fontSize: 16,
     fontFamily: 'AveriaLibre-Regular',
+  },
+  textInputImagem: {
+    backgroundColor: '#fff',
+    width: 100,
+    height: 50,
+    fontSize: 20,
+    borderRadius: 0,
+    textAlign: 'left',
+    fontFamily: 'AveriaLibre-Regular'
   },
   alert: {
     color: '#FD7979',

@@ -11,6 +11,8 @@ import RecuperarSenha from "./src/screens/RecuperarSenha";
 import Coleta from "./src/screens/Coleta"
 import NovaPesquisa from "./src/screens/NovaPesquisa";
 import Relatorio from "./src/screens/Relatorio";
+import { store } from "./redux/store";
+import { Provider } from "react-redux";
 
 const Stack = createStackNavigator();
 
@@ -18,78 +20,82 @@ const App = () => {
 
     return (
 
-      <NavigationContainer>
+      <Provider store={store}>
 
-        <Stack.Navigator
+        <NavigationContainer>
 
-          initialRouteName="Login"
+          <Stack.Navigator
 
-          screenOptions={{
-            headerTintColor: '#573FBA',
-            headerStyle: {backgroundColor: '#2B1D62'},
-            headerTitleStyle: {fontFamily: 'AveriaLibre-Bold', color: '#fff'},
-          }}>
+            initialRouteName="Login"
 
-          <Stack.Screen 
-            name="Login"
-            component={Login}
-            options={{headerShown: false}}
-          />
+            screenOptions={{
+              headerTintColor: '#573FBA',
+              headerStyle: {backgroundColor: '#2B1D62'},
+              headerTitleStyle: {fontFamily: 'AveriaLibre-Bold', color: '#fff'},
+            }}>
 
-          <Stack.Screen 
-            name="Agradecimentos" 
-            component={Agradecimentos} 
-            options={{headerShown: false}}
+            <Stack.Screen 
+              name="Login"
+              component={Login}
+              options={{headerShown: false}}
+            />
 
-          />
+            <Stack.Screen 
+              name="Agradecimentos" 
+              component={Agradecimentos} 
+              options={{headerShown: false}}
 
-          <Stack.Screen 
-            name="Modificar Pesquisa" 
-            component={ModificarPesquisa}
-          />
+            />
 
-          <Stack.Screen 
-          name="Home" 
-          component={Home} 
-          />
+            <Stack.Screen 
+              name="Modificar Pesquisa" 
+              component={ModificarPesquisa}
+            />
 
-          <Stack.Screen
-            name="Drawer"
-            component={Drawer}
-            options={{headerShown: false}}
-          />
+            <Stack.Screen 
+            name="Home" 
+            component={Home} 
+            />
 
-          <Stack.Screen 
-            name="Ações da Pesquisa"
-            component={AcoesPesquisa} 
-          />
-          <Stack.Screen 
-            name="Nova Conta" 
-            component={NovaConta} 
-          />
-          <Stack.Screen 
-            name="Recuperar Senha"
-            component={RecuperarSenha} 
-          />
+            <Stack.Screen
+              name="Drawer"
+              component={Drawer}
+              options={{headerShown: false}}
+            />
 
-          <Stack.Screen
-            name="Coleta"
-            component={Coleta}
-          />
+            <Stack.Screen 
+              name="Ações da Pesquisa"
+              component={AcoesPesquisa} 
+            />
+            <Stack.Screen 
+              name="Nova Conta" 
+              component={NovaConta} 
+            />
+            <Stack.Screen 
+              name="Recuperar Senha"
+              component={RecuperarSenha} 
+            />
 
-          <Stack.Screen 
-            name="Nova Pesquisa"
-            component={NovaPesquisa} 
-          />
+            <Stack.Screen
+              name="Coleta"
+              component={Coleta}
+            />
 
-          <Stack.Screen 
-            name="Relatório" 
-            component={Relatorio} 
-          />
+            <Stack.Screen 
+              name="Nova Pesquisa"
+              component={NovaPesquisa} 
+            />
 
-        </Stack.Navigator>
+            <Stack.Screen 
+              name="Relatório" 
+              component={Relatorio} 
+            />
 
-      </NavigationContainer>
+          </Stack.Navigator>
+
+        </NavigationContainer>
+
+      </Provider>
 
     );
 
