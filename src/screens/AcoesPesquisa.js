@@ -11,7 +11,9 @@ const AcoesPesquisa = (props) => {
   }
 
   goToModificar = () => {
-    props.navigation.navigate('Modificar Pesquisa');
+    const id = props.route.params.id;
+    console.log("ID:", id);
+    props.navigation.navigate('Modificar Pesquisa', { id: id });
   }
 
   return (

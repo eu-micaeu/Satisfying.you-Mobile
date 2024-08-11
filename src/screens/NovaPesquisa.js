@@ -154,6 +154,15 @@ const styles = {
     fontSize: 16,
     fontFamily: 'AveriaLibre-Regular',
   },
+  textInputImagem: {
+    backgroundColor: '#fff',
+    width: 100,
+    height: 50,
+    fontSize: 20,
+    borderRadius: 0,
+    textAlign: 'left',
+    fontFamily: 'AveriaLibre-Regular'
+  },
   alert: {
     color: '#FD7979',
     fontSize: 12,
