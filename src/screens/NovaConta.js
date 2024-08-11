@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, StyleSheet, Pressable } from "react-native";
+import {createUserWithEmailAndPassword} from 'firebase/auth';
+import { auth_mod } from '../config/firebase';
 
 const NovaConta = (props) => {
   const [email, setEmail] = useState('');
@@ -9,8 +11,19 @@ const NovaConta = (props) => {
   const [errorMessageSenha, setErrorMessageSenha] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
+    const cadastrarUsuario = () => {
+      createUserWithEmailAndPassword(auth_mod, email, senha1, senha2)
+        .then(userCredencial => {
+          goToLogin();
+        })
+        .catch(error => {
+          res.render('Erro ao criar usuario: ' + JSON.stringify(error));
+        });
+    };
+  
+
   const handleEmail = (text) => {
-    setEmail(text);
+  setEmail(text);
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (!re.test(String(text).toLowerCase())) {
       setErrorMessageEmail("E-mail inválido");
@@ -31,17 +44,6 @@ const NovaConta = (props) => {
     setErrorMessageSenha('');
   };
 
-
-  const cadastrarConta = () => {
-    if (senha1 !== senha2) {
-      setErrorMessageSenha("As senhas não coincidem.");
-    } else if (!senha1.trim()|| !senha2.trim() || !email.trim()) {
-      setErrorMessageSenha('Preencha todos os campos.');
-    }else {
-      goToLogin();
-    }
-  };
-
   const goToLogin = () => {
     props.navigation.navigate('Login');
   };
@@ -53,14 +55,11 @@ const NovaConta = (props) => {
         style={styles.textInput}
         placeholder="exemplo@hotmail.com"
         placeholderTextColor="#3F92C5"
-        onChangeText={handleEmail}
         keyboardType="email-address"
+        onChangeText={handleEmail}
       />
-      {errorMessageEmail && (
-        <Text style={styles.errorMessage}>
-          {errorMessageEmail}
-        </Text>
-      )}
+
+      {errorMessageEmail && <Text style={styles.errorMessage}></Text>}
 
       <Text style={styles.text}>Senha</Text>
       <TextInput
@@ -79,12 +78,15 @@ const NovaConta = (props) => {
       />
 
       {errorMessageSenha && (
-        <Text style={styles.errorMessage}>
-          {errorMessageSenha}
-        </Text>
+        <Text style={styles.errorMessage}>{errorMessageSenha}</Text>
       )}
 
-      <Pressable onPress={cadastrarConta} style={styles.buttonCadastrar} disabled={isButtonDisabled}>
+      <Pressable
+        onPress={() => {
+          cadastrarUsuario();
+        }}
+        style={styles.buttonCadastrar}
+        disabled={isButtonDisabled}>
         <Text style={styles.buttonText}>CADASTRAR</Text>
       </Pressable>
     </View>

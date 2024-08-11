@@ -1,9 +1,6 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getAuth } from "firebase/auth";
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyB4FLb2f2wcWAJ_pdl1kmFG2Hhxs9k3FHc",
   authDomain: "satisfyingyou-mobile-cbe6a.firebaseapp.com",
@@ -16,4 +13,6 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-export default app;
+const auth_mod = getAuth(app);
+
+export { auth_mod };

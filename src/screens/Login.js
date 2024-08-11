@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Image, TextInput} from 'react-native'
-import { Button } from 'react-native-paper'
+import { View, Text, StyleSheet, Image, TextInput } from 'react-native';
+import { Button } from 'react-native-paper';
+import { auth_mod } from "../config/firebase";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
 const Login = (props) => {
 
@@ -12,19 +14,9 @@ const Login = (props) => {
 
 
   const handleEmailChange = (text) => {
-    setEmail(text); 
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if(text){
-      if (!re.test(String(email).toLowerCase())) {
-        seterrorMessage("E-mail e/ou senha inválidos");
-        setIsButtonDisabled(true);
-      }else {
-        seterrorMessage("");
-        setIsButtonDisabled(false);
-      }
-    }else{
-      seterrorMessage("");
-    }
+    setEmail(text);
+    seterrorMessage("");
+    setIsButtonDisabled(false);
   }
   
   const handleSenhaChange = (text) => {
@@ -44,12 +36,13 @@ const Login = (props) => {
   }
 
   const handleLogin = () => {
-    if (!email.trim()|| !senha.trim()) {
-      seterrorMessage('Preencha todos os dados');
-    } else {
-      seterrorMessage('')
-      goToDrawer();
-    }
+      signInWithEmailAndPassword(auth_mod, email, senha)
+      .then(() => {
+        goToDrawer();
+      })
+        .catch(error => {
+        seterrorMessage(error.message);
+      });
   };
 
   return (

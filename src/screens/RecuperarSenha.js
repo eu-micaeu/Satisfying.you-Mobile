@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import {View, Text, TextInput, StyleSheet, Pressable} from 'react-native';
+import { sendPasswordResetEmail } from 'firebase/auth';
+import { auth_mod } from '../config/firebase';  
 
 const RecuperarSenha = (props) => {
   
@@ -7,29 +9,32 @@ const RecuperarSenha = (props) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
+  const handleRecuperarSenha = () => {
+    sendPasswordResetEmail(auth_mod, email)
+      .then(() => {
+        goToLogin();
+      })
+      .catch(erro => {
+        switch (erro) {
+          case 'auth/invalid-email':
+            setErrorMessage('E-mail inválido.');
+            break;
+          case 'auth/user-not-found':
+            setErrorMessage('E-mail não cadastrado');
+            break;
+          default:
+            setErrorMessage('Ocorreu um erro, tente novamente mais tarde.');
+            break;
+        }
+      });
+  };
+
   const handleEmailChange = text => {
     setEmail(text);
-    const re =
-      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (!re.test(String(email).toLowerCase())) {
-      setErrorMessage('E-mail parece ser inválido');
-      setIsButtonDisabled(true);
-    } else {
-      setErrorMessage("");
-      setIsButtonDisabled(false);
-    }
   };
 
   const goToLogin = () => {
     props.navigation.navigate('Login');
-  }
-
-  const handleRecuperarSenha = () => {
-    if(!email.trim()){
-      setErrorMessage("Email vazio")
-    } else{
-      goToLogin();
-    }
   }
 
     return (
