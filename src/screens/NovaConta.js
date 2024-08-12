@@ -17,7 +17,7 @@ const NovaConta = (props) => {
           goToLogin();
         })
         .catch(error => {
-          res.render('Erro ao criar usuario: ' + JSON.stringify(error));
+          setErrorMessageSenha('Erro ao criar usuario: ' + JSON.stringify(error))
         });
     };
   
