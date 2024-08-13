@@ -13,6 +13,8 @@ const Home = (props) => {
   const [listaPesquisas, setListaPesquisas] = useState([]);
   const db = getFirestore(app);
   const pesquisaCollection = collection(db, 'pesquisas');
+  const [filteredPesquisas, setFilteredPesquisas] = useState([]);
+  const [searchText, setSearchText] = useState('');
 
   useEffect(() => {
     const q = query(pesquisaCollection);
@@ -26,10 +28,25 @@ const Home = (props) => {
       });
       console.log("Pesquisas:", pesquisas); // Adicione esta linha para depuração
       setListaPesquisas(pesquisas);
+      setFilteredPesquisas(pesquisas);
     });
     return () => unsubscribe();
   }, []);
 
+
+  // Função para filtrar as pesquisas com base no texto de pesquisa
+  const handleSearch = (text) => {
+    setSearchText(text);
+
+    if (text) {
+      const filtered = listaPesquisas.filter((novaPesquisa) =>
+        novaPesquisa.nome.toLowerCase().includes(text.toLowerCase())
+      );
+      setFilteredPesquisas(filtered);
+    } else {
+      setFilteredPesquisas(listaPesquisas);
+    }
+  };
 
   const itemPesquisa = ({ item }) => (
     <TouchableOpacity
@@ -48,11 +65,15 @@ const Home = (props) => {
     <View style={styles.body}>
       <View style={styles.viewTextInput}>
         <Image source={require('../images/pesquisa.png')} />
-        <TextInput style={styles.textInput} placeholder='Insira o termo da busca...' />
+        <TextInput style={styles.textInput} 
+          placeholder='Insira o termo da busca...' 
+          value={searchText}
+          onChangeText={handleSearch}
+          />
       </View>
       <View style={styles.containerCards}>
         <FlatList
-          data={listaPesquisas}
+          data={filteredPesquisas}
           renderItem={itemPesquisa}
           keyExtractor={item => item.id}
           horizontal

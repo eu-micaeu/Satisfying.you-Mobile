@@ -19,7 +19,6 @@ const NovaPesquisa = (props) => {
   };
 
   const handleCadastro = async () => {
-    // Validações
     if (!nomePesquisa.trim()) setNomePesquisaError('Preencha o nome da pesquisa');
     else setNomePesquisaError('');
 
@@ -37,7 +36,11 @@ const NovaPesquisa = (props) => {
         imageUrl = await getDownloadURL(imageRef);
       }
 
-      const novaPesquisa = { nome: nomePesquisa, data: dataPesquisa, imagem: imageUrl };
+      const novaPesquisa = { 
+        nome: nomePesquisa, 
+        data: dataPesquisa, 
+        imagem: imageUrl 
+      };
 
       addDoc(pesquisaCollection, novaPesquisa).then(() => {
         goToHome();
@@ -71,7 +74,6 @@ const NovaPesquisa = (props) => {
           value={dataPesquisa}
           onChangeText={text => setDataPesquisa(text)}
           placeholder='DD/MM/AAAA'
-          keyboardType='numeric'
         />
         <Image style={styles.calendar} source={require('../images/icon.png')} />
       </View>
