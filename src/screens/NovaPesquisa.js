@@ -34,6 +34,7 @@ const NovaPesquisa = (props) => {
         const imageRef = ref(storage, `pesquisas/${Date.now()}_${image.fileName}`);
         await uploadBytes(imageRef, blob);
         imageUrl = await getDownloadURL(imageRef);
+        console.log("Imagem enviada com sucesso: ", imageUrl);
       }
 
       const novaPesquisa = {

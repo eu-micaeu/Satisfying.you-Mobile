@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, Modal, TouchableOpacity, TextInput, Pressable } from 'react-native';
 import { Button } from 'react-native-paper';
-import { updateDoc, doc, getFirestore, getDoc,deleteDoc } from 'firebase/firestore';
+import { updateDoc, doc, getFirestore, getDoc, deleteDoc } from 'firebase/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
 import { launchImageLibrary } from 'react-native-image-picker';
 
@@ -32,17 +32,17 @@ const ModificarPesquisa = (props) => {
     } else {
       setNomePesquisaError('');
     }
-  
+
     if (!novaData.trim()) {
       setDataPesquisaError('Preencha a data da pesquisa');
     } else {
       setDataPesquisaError('');
     }
-  
+
     if (novoNome.trim() && novaData.trim()) {
       try {
         let imageUrl = null;
-  
+
         if (image) {
           try {
             const response = await fetch(image.uri);
@@ -55,19 +55,19 @@ const ModificarPesquisa = (props) => {
             throw new Error("Falha ao enviar a imagem");
           }
         }
-  
+
         const pesRef = doc(db, "pesquisas", id);
         const pesquisaDoc = await getDoc(pesRef);
-  
+
         if (pesquisaDoc.exists()) {
           const pesquisaData = pesquisaDoc.data();
-  
+
           if (pesquisaData.imagem) {
             console.log('URL da imagem antiga:', pesquisaData.imagem); // Adiciona um log aqui
-  
+
             // Obtenha a referência da imagem com base na URL
             const oldImageRef = ref(storage, pesquisaData.imagem);
-  
+
             // Verifica se a referência da imagem é válida
             try {
               await deleteObject(oldImageRef);
@@ -76,48 +76,47 @@ const ModificarPesquisa = (props) => {
               console.error('Erro ao deletar a imagem antiga:', deleteError);
             }
           }
-  
+
           const novaPesquisa = {
             nome: novoNome,
             data: novaData,
             imagem: imageUrl,
           };
-  
+
           await updateDoc(pesRef, novaPesquisa);
-          console.log("Pesquisa atualizada com sucesso!");
           goToHome();
         } else {
           console.error("Documento não encontrado");
         }
-  
+
       } catch (error) {
         console.error("Erro ao modificar a pesquisa: ", error);
       }
     }
-  };  
+  };
 
   const deletarPesquisa = async (id) => {
     const docRef = doc(db, "pesquisas", id);
-    
-    const docSnap = await getDoc(docRef);
-    
-    if (docSnap.exists()) {
-      const data = docSnap.data();
-      const imageUrl = data.imageUrl; 
-  
-      if (imageUrl) {
-        const storage = getStorage();
+
+    try {
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        const imageUrl = data.imagem;
         const imageRef = ref(storage, imageUrl);
+        console.log('Tentando deletar a imagem com URL:', imageUrl);
         await deleteObject(imageRef);
+        await deleteDoc(docRef);
+        console.log('Documento deletado com sucesso.');
+        goToHome();
+      } else {
+        console.log("Documento não encontrado!");
       }
-  
-      await deleteDoc(docRef);
-  
-      goToHome();
-    } else {
-      console.log("Documento não encontrado!");
+    } catch (error) {
+      console.error('Erro ao deletar a pesquisa:', error);
     }
   };
+
 
   const handleImagePicker = () => {
     launchImageLibrary({}, (response) => {

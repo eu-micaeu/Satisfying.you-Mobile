@@ -9,7 +9,9 @@ const AcoesPesquisa = (props) => {
   }
 
   goToColeta = () => {
-    
+    const id = props.route.params.id;
+    const nome = props.route.params.nome;
+    props.navigation.navigate('Coleta', { id: id, nome: nome } );
   }
 
   goToModificar = () => {

@@ -26,7 +26,6 @@ const Home = (props) => {
           ...doc.data()
         });
       });
-      console.log("Pesquisas:", pesquisas); // Adicione esta linha para depuração
       setListaPesquisas(pesquisas);
       setFilteredPesquisas(pesquisas);
     });
