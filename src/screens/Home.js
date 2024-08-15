@@ -51,7 +51,7 @@ const Home = (props) => {
   const itemPesquisa = ({ item }) => (
     <TouchableOpacity
       style={styles.card}
-      onPress={() => props.navigation.navigate('Ações da Pesquisa', { id: item.id })}
+      onPress={() => props.navigation.navigate('Ações da Pesquisa', { id: item.id , nome: item.nome})}
     >
       {item.imagem ? <Image source={{ uri: item.imagem }} style={styles.cardImage} /> : null}
       <Text style={styles.title}>{item.nome}</Text>

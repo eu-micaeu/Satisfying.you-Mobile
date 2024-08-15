@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Pressable, Image } from 'react-native';
+import { View, Text, TextInput, Pressable, Image, Alert } from 'react-native';
 import { collection, addDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { launchImageLibrary } from 'react-native-image-picker';
-import { db, storage } from "../config/firebase"; 
+import { launchImageLibrary, launchCamera } from 'react-native-image-picker';
+import { db, storage } from "../config/firebase";
 
 const NovaPesquisa = (props) => {
   const [nomePesquisa, setNomePesquisa] = useState('');
@@ -36,10 +36,15 @@ const NovaPesquisa = (props) => {
         imageUrl = await getDownloadURL(imageRef);
       }
 
-      const novaPesquisa = { 
-        nome: nomePesquisa, 
-        data: dataPesquisa, 
-        imagem: imageUrl 
+      const novaPesquisa = {
+        nome: nomePesquisa,
+        data: dataPesquisa,
+        imagem: imageUrl,
+        avaliacaoP: 0,
+        avaliacaoR: 0,
+        avaliacaoN: 0,
+        avaliacaoB: 0,
+        avaliacaoE: 0,
       };
 
       addDoc(pesquisaCollection, novaPesquisa).then(() => {
@@ -51,11 +56,32 @@ const NovaPesquisa = (props) => {
   };
 
   const handleImagePicker = () => {
-    launchImageLibrary({}, (response) => {
-      if (response.assets && response.assets.length > 0) {
-        setImage(response.assets[0]);
-      }
-    });
+    Alert.alert(
+      "Selecionar Imagem",
+      "Escolha uma opção",
+      [
+        {
+          text: "Câmera",
+          onPress: () => launchCamera({ mediaType: 'photo' }, (response) => {
+            if (response.assets && response.assets.length > 0) {
+              setImage(response.assets[0]);
+            }
+          })
+        },
+        {
+          text: "Galeria",
+          onPress: () => launchImageLibrary({ mediaType: 'photo' }, (response) => {
+            if (response.assets && response.assets.length > 0) {
+              setImage(response.assets[0]);
+            }
+          })
+        },
+        {
+          text: "Cancelar",
+          style: "cancel"
+        }
+      ]
+    );
   };
 
   return (
