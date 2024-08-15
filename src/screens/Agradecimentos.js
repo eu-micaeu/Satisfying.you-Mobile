@@ -1,20 +1,21 @@
 import { useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 
 const Agradecimentos = (props) => {
-  const navigation = useNavigation();
 
   useEffect(() => {
     const timer = setTimeout(() => {
 
-      navigation.navigate('Coleta');
+      const id = props.route.params.id;
+      const nome = props.route.params.nome;
+      props.navigation.navigate('Coleta', { id: id, nome: nome })
+
     }, 3000);
 
     return () => clearTimeout(timer);
   }, []);
 
- 
+
   return (
 
     <View style={styles.body}>
@@ -45,12 +46,12 @@ const styles = StyleSheet.create({
 
   text: {
     color: '#FFFFFF',
-    fontFamily:'AveriaLibre-Regular',
+    fontFamily: 'AveriaLibre-Regular',
     fontSize: 18,
     textAlign: 'center',
     margin: 20,
   },
-  
+
 });
 
 export default Agradecimentos;

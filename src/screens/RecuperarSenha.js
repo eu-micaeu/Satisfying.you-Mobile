@@ -6,8 +6,7 @@ import { useSelector } from 'react-redux';
 
 const RecuperarSenha = (props) => {
   
-  const email = useSelector((state)=>state.login.email);
-  //const [email, setEmail] = useState('')
+  const [email, setEmail] = useState('')
   const [errorMessage, setErrorMessage] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 

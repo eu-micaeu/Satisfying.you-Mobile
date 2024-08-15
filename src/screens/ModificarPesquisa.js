@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, Modal, TouchableOpacity, TextInput, Pressable } from 'react-native';
 import { Button } from 'react-native-paper';
-import { updateDoc, doc, getFirestore, query, where, getDocs, collection } from 'firebase/firestore';
-import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { updateDoc, doc, getFirestore, getDoc, deleteDoc } from 'firebase/firestore';
+import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
 import { launchImageLibrary } from 'react-native-image-picker';
 
-import app from '../config/firebase';
+import { app } from '../config/firebase';
 
 const db = getFirestore(app);
 const storage = getStorage(app);
@@ -19,100 +19,108 @@ const ModificarPesquisa = (props) => {
   const [image, setImage] = useState(null);
 
   const goToHome = () => {
-
     props.navigation.navigate('Drawer');
-
   };
 
   const togglePopUp = () => {
-
     setShowPopUp(!showPopUp);
-
   };
 
-  const editarPesquisa = async (id) => {
-
+  const editarPesquisa = async (id, novoNome, novaData, image) => {
     if (!novoNome.trim()) {
-
       setNomePesquisaError('Preencha o nome da pesquisa');
-
     } else {
       setNomePesquisaError('');
-
     }
 
     if (!novaData.trim()) {
-
       setDataPesquisaError('Preencha a data da pesquisa');
-
     } else {
-
       setDataPesquisaError('');
-
     }
 
     if (novoNome.trim() && novaData.trim()) {
-
       try {
-
-        deletarPesquisa(id);
-
         let imageUrl = null;
 
         if (image) {
-          const response = await fetch(image.uri);
-          const blob = await response.blob();
-          const imageRef = ref(storage, `pesquisas/${Date.now()}_${image.fileName}`);
-          await uploadBytes(imageRef, blob);
-          imageUrl = await getDownloadURL(imageRef);
+          try {
+            const response = await fetch(image.uri);
+            const blob = await response.blob();
+            const imageRef = ref(storage, `pesquisas/${Date.now()}_${image.fileName}`);
+            await uploadBytes(imageRef, blob);
+            imageUrl = await getDownloadURL(imageRef);
+          } catch (imageError) {
+            console.error("Erro ao fazer upload da imagem: ", imageError);
+            throw new Error("Falha ao enviar a imagem");
+          }
         }
 
-        const novaPesquisa = {
-          nome: novoNome,
-          data: novaData,
-          imagem: imageUrl,
-          id: id,
-        };
+        const pesRef = doc(db, "pesquisas", id);
+        const pesquisaDoc = await getDoc(pesRef);
 
-        addDoc(pesquisaCollection, novaPesquisa).then((docRef) => {
+        if (pesquisaDoc.exists()) {
+          const pesquisaData = pesquisaDoc.data();
+
+          if (pesquisaData.imagem) {
+            console.log('URL da imagem antiga:', pesquisaData.imagem); // Adiciona um log aqui
+
+            // Obtenha a referência da imagem com base na URL
+            const oldImageRef = ref(storage, pesquisaData.imagem);
+
+            // Verifica se a referência da imagem é válida
+            try {
+              await deleteObject(oldImageRef);
+              console.log('Imagem antiga deletada com sucesso.');
+            } catch (deleteError) {
+              console.error('Erro ao deletar a imagem antiga:', deleteError);
+            }
+          }
+
+          const novaPesquisa = {
+            nome: novoNome,
+            data: novaData,
+            imagem: imageUrl,
+          };
+
+          await updateDoc(pesRef, novaPesquisa);
           goToHome();
-        }).catch((error) => {
-          console.error("Erro ao adicionar a pesquisa: ", error);
-        });
+        } else {
+          console.error("Documento não encontrado");
+        }
 
       } catch (error) {
-
-        console.error("Erro ao adicionar a pesquisa: ", error);
-
+        console.error("Erro ao modificar a pesquisa: ", error);
       }
-
     }
-
   };
-
 
   const deletarPesquisa = async (id) => {
-    try {
-      const pesquisaCollection = collection(db, 'pesquisas');
-      const q = query(pesquisaCollection, where('id', '==', id));
-      const querySnapshot = await getDocs(q);
+    const docRef = doc(db, "pesquisas", id);
 
-      if (!querySnapshot.empty) {
-        const docRef = doc(db, 'pesquisas', querySnapshot.docs[0].id);
+    try {
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        const imageUrl = data.imagem;
+        const imageRef = ref(storage, imageUrl);
+        console.log('Tentando deletar a imagem com URL:', imageUrl);
+        await deleteObject(imageRef);
         await deleteDoc(docRef);
-        console.log("Document deleted successfully");
+        console.log('Documento deletado com sucesso.');
         goToHome();
       } else {
-        console.log("No matching document found");
+        console.log("Documento não encontrado!");
       }
     } catch (error) {
-      console.error("Error deleting document:", error);
+      console.error('Erro ao deletar a pesquisa:', error);
     }
   };
+
 
   const handleImagePicker = () => {
     launchImageLibrary({}, (response) => {
-      console.log(response); // Adiciona um log para verificar a resposta
+      console.log(response);
       if (response && response.assets && response.assets.length > 0) {
         setImage(response.assets[0]);
       } else {
@@ -143,7 +151,7 @@ const ModificarPesquisa = (props) => {
           {image && <Image source={{ uri: image.uri }} style={styles.image} />}
         </Pressable>
       </View>
-      <Button style={styles.buttonSalvar} onPress={() => editarPesquisa(props.route.params.id)}>
+      <Button style={styles.buttonSalvar} onPress={() => editarPesquisa(props.route.params.id, novoNome, novaData, image)}>
         <Text style={styles.buttonSalvarText}>Salvar</Text>
       </Button>
       <TouchableOpacity onPress={togglePopUp} style={styles.apagar}>

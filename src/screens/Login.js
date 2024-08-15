@@ -20,6 +20,7 @@ const Login = (props) => {
     setEmail(text);
     seterrorMessage("");
     setIsButtonDisabled(false);
+    dispatch(reducerSetLogin({email: text}));
   }
   
   const handleSenhaChange = (text) => {

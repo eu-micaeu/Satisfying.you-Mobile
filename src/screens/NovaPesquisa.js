@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Pressable, Image } from 'react-native';
-import { collection, addDoc, initializeFirestore } from "firebase/firestore";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { launchImageLibrary } from 'react-native-image-picker';
-import app from "../config/firebase";
+import { View, Text, TextInput, Pressable, Image, Alert } from 'react-native';
+import { collection, addDoc } from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { launchImageLibrary, launchCamera } from 'react-native-image-picker';
+import { db, storage } from "../config/firebase";
 
 const NovaPesquisa = (props) => {
   const [nomePesquisa, setNomePesquisa] = useState('');
   const [dataPesquisa, setDataPesquisa] = useState('');
   const [nomePesquisaError, setNomePesquisaError] = useState('');
   const [dataPesquisaError, setDataPesquisaError] = useState('');
-  const [image, setImage] = useState(null); // State para armazenar a imagem
+  const [image, setImage] = useState(null);
 
-  const db = initializeFirestore(app, {experimentalForceLongPolling: true});
-  const storage = getStorage(app);
   const pesquisaCollection = collection(db, 'pesquisas');
 
   const goToHome = () => {
@@ -21,16 +19,11 @@ const NovaPesquisa = (props) => {
   };
 
   const handleCadastro = async () => {
-    if (!nomePesquisa.trim()) {
-      setNomePesquisaError('Preencha o nome da pesquisa');
-    } else {
-      setNomePesquisaError('');
-    }
-    if (!dataPesquisa.trim()) {
-      setDataPesquisaError('Preencha a data da pesquisa');
-    } else {
-      setDataPesquisaError('');
-    }
+    if (!nomePesquisa.trim()) setNomePesquisaError('Preencha o nome da pesquisa');
+    else setNomePesquisaError('');
+
+    if (!dataPesquisa.trim()) setDataPesquisaError('Preencha a data da pesquisa');
+    else setDataPesquisaError('');
 
     if (nomePesquisa.trim() && dataPesquisa.trim()) {
       let imageUrl = null;
@@ -41,15 +34,21 @@ const NovaPesquisa = (props) => {
         const imageRef = ref(storage, `pesquisas/${Date.now()}_${image.fileName}`);
         await uploadBytes(imageRef, blob);
         imageUrl = await getDownloadURL(imageRef);
+        console.log("Imagem enviada com sucesso: ", imageUrl);
       }
 
       const novaPesquisa = {
         nome: nomePesquisa,
         data: dataPesquisa,
         imagem: imageUrl,
+        avaliacaoP: 0,
+        avaliacaoR: 0,
+        avaliacaoN: 0,
+        avaliacaoB: 0,
+        avaliacaoE: 0,
       };
 
-      addDoc(pesquisaCollection, novaPesquisa).then((docRef) => {
+      addDoc(pesquisaCollection, novaPesquisa).then(() => {
         goToHome();
       }).catch((error) => {
         console.error("Erro ao adicionar a pesquisa: ", error);
@@ -58,11 +57,32 @@ const NovaPesquisa = (props) => {
   };
 
   const handleImagePicker = () => {
-    launchImageLibrary({}, (response) => {
-      if (response.assets && response.assets.length > 0) {
-        setImage(response.assets[0]);
-      }
-    });
+    Alert.alert(
+      "Selecionar Imagem",
+      "Escolha uma opção",
+      [
+        {
+          text: "Câmera",
+          onPress: () => launchCamera({ mediaType: 'photo' }, (response) => {
+            if (response.assets && response.assets.length > 0) {
+              setImage(response.assets[0]);
+            }
+          })
+        },
+        {
+          text: "Galeria",
+          onPress: () => launchImageLibrary({ mediaType: 'photo' }, (response) => {
+            if (response.assets && response.assets.length > 0) {
+              setImage(response.assets[0]);
+            }
+          })
+        },
+        {
+          text: "Cancelar",
+          style: "cancel"
+        }
+      ]
+    );
   };
 
   return (
@@ -81,7 +101,6 @@ const NovaPesquisa = (props) => {
           value={dataPesquisa}
           onChangeText={text => setDataPesquisa(text)}
           placeholder='DD/MM/AAAA'
-          keyboardType='numeric'
         />
         <Image style={styles.calendar} source={require('../images/icon.png')} />
       </View>
