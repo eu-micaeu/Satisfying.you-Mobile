@@ -97,8 +97,26 @@ const ModificarPesquisa = (props) => {
   };  
 
   const deletarPesquisa = async (id) => {
-    deleteDoc(doc(db, "pesquisas", id));
-    goToHome();
+    const docRef = doc(db, "pesquisas", id);
+    
+    const docSnap = await getDoc(docRef);
+    
+    if (docSnap.exists()) {
+      const data = docSnap.data();
+      const imageUrl = data.imageUrl; 
+  
+      if (imageUrl) {
+        const storage = getStorage();
+        const imageRef = ref(storage, imageUrl);
+        await deleteObject(imageRef);
+      }
+  
+      await deleteDoc(docRef);
+  
+      goToHome();
+    } else {
+      console.log("Documento não encontrado!");
+    }
   };
 
   const handleImagePicker = () => {
