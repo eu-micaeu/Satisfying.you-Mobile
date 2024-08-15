@@ -44,7 +44,20 @@ const Login = (props) => {
         goToDrawer();
       })
         .catch(error => {
-        seterrorMessage(error.message);
+        switch (error.code) {
+          case 'auth/user-not-found':
+            seterrorMessage('Email não cadastrado!');
+            break;
+          case 'auth/wrong-password':
+            seterrorMessage('Email ou senha inválido(s)!');
+            break;
+          case 'auth/invalid-login-credentials':
+            seterrorMessage('Email ou senha inválido(s)!');
+            break;
+          default:
+            seterrorMessage('Erro, tente novamente mais tarde!');
+            break;
+        }
       });
   };
 

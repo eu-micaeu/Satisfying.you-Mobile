@@ -17,7 +17,22 @@ const NovaConta = (props) => {
           goToLogin();
         })
         .catch(error => {
-          res.render('Erro ao criar usuario: ' + JSON.stringify(error));
+          switch (error.code) {
+            case 'auth/weak-password':
+              setErrorMessageSenha(
+                'Senha Fraca! Deve conter mais que 6 dígitos',
+              );
+              break;
+            case 'auth/invalid-email':
+              setErrorMessageSenha('Email inválido!');
+              break;
+            case 'auth/email-already-in-use':
+              setErrorMessageSenha('Email já está sendo usado!');
+              break;
+            default:
+              setErrorMessageSenha('Ocorreu um erro, tente novamente mais tarde!');
+              break;
+          }
         });
     };
   
