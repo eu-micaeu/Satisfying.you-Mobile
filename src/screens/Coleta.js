@@ -4,8 +4,15 @@ import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../config/firebase";
 
 const Coleta = (props) => {
+  // Desestruturação segura dos parâmetros
+  const { id, nome } = props.route.params || {};
+
+  console.log('Parâmetros recebidos:', props.route.params);
+
   const goToAgradecimento = () => {
-    props.navigation.navigate('Agradecimentos');
+    const id = props.route.params.id;
+    const nome = props.route.params.nome;
+    props.navigation.navigate('Agradecimentos', { id: id, nome: nome } );
   };
 
   const icones = [
@@ -17,24 +24,22 @@ const Coleta = (props) => {
   ];
 
   const handlePress = async (field) => {
-    const id = props.route.params.id;
     const pesquisaRef = doc(db, "pesquisas", id); 
     const pesquisaSnap = await getDoc(pesquisaRef);
 
     if (pesquisaSnap.exists()) {
-      const currentValue = pesquisaSnap.data()[field];
+      const data = pesquisaSnap.data();
+      const currentValue = data[field] || 0; // Se o campo não existe, inicia com 0
+
       await updateDoc(pesquisaRef, {
         [field]: currentValue + 1
       });
+
+      goToAgradecimento(); 
+    } else {
+      console.log("Documento não encontrado!");
     }
-
-    goToAgradecimento();
-
   };
-
-  const nome = props.route.params.nome;
-
-  console.log("Nome:", nome);
 
   return (
     <View style={styles.body}>
