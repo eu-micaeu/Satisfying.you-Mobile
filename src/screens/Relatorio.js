@@ -19,23 +19,18 @@ const Relatorio = (props) => {
             if (pesquisaSnap.exists()) {
                 const data = pesquisaSnap.data();
                 const newSeries = [
-                    data.avaliacaoE,
-                    data.avaliacaoB,
-                    data.avaliacaoN,
-                    data.avaliacaoR,
-                    data.avaliacaoP, 
+                    data.avaliacaoE || 0,
+                    data.avaliacaoB || 0,
+                    data.avaliacaoN || 0,
+                    data.avaliacaoR || 0,
+                    data.avaliacaoP || 0, 
                 ];
                 
                 setSeries(newSeries);
-                setIsDataLoaded(true);
-
             } else {
-
                 console.log("Documento não encontrado!");
-                setIsDataLoaded(true); 
-
             }
-
+            setIsDataLoaded(true); 
         };
 
         fetchData();
@@ -44,13 +39,17 @@ const Relatorio = (props) => {
     return (
         <View style={styles.container}>
             {isDataLoaded ? (
-                <PieChart 
-                    widthAndHeight={widthAndHeight} 
-                    series={series} 
-                    sliceColor={sliceColor} 
-                    coverFill="#FFA500" 
-                    style={styles.grafico} 
-                />
+                series.every(value => value === 0) ? (
+                    <Text style={styles.textAviso}>Sem avaliações...</Text>
+                ) : (
+                    <PieChart 
+                        widthAndHeight={widthAndHeight} 
+                        series={series} 
+                        sliceColor={sliceColor} 
+                        coverFill="#FFA500" 
+                        style={styles.grafico} 
+                    />
+                )
             ) : (
                 <Text style={styles.text}>Carregando dados...</Text> 
             )}
@@ -107,6 +106,12 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontFamily: 'AveriaLibre-Regular',
         marginLeft: 10,
+    },
+    textAviso:{
+
+        color: '#FFFFFF',
+        marginTop: 100,
+
     },
     title: {
         fontSize: 24,

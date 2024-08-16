@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, Modal, TouchableOpacity, TextInput, Pressable } from 'react-native';
+import { View, Text, StyleSheet, Image, Modal, TouchableOpacity, TextInput, Pressable, Alert } from 'react-native';
 import { Button } from 'react-native-paper';
 import { updateDoc, doc, getFirestore, getDoc, deleteDoc } from 'firebase/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
-import { launchImageLibrary } from 'react-native-image-picker';
+import { launchImageLibrary, launchCamera } from 'react-native-image-picker';
 
 import { app } from '../config/firebase';
 
@@ -24,6 +24,35 @@ const ModificarPesquisa = (props) => {
 
   const togglePopUp = () => {
     setShowPopUp(!showPopUp);
+  };
+
+  const handleImagePicker = () => {
+    Alert.alert(
+      "Selecionar Imagem",
+      "Escolha uma opção",
+      [
+        {
+          text: "Câmera",
+          onPress: () => launchCamera({ mediaType: 'photo' }, (response) => {
+            if (response.assets && response.assets.length > 0) {
+              setImage(response.assets[0]);
+            }
+          })
+        },
+        {
+          text: "Galeria",
+          onPress: () => launchImageLibrary({ mediaType: 'photo' }, (response) => {
+            if (response.assets && response.assets.length > 0) {
+              setImage(response.assets[0]);
+            }
+          })
+        },
+        {
+          text: "Cancelar",
+          style: "cancel"
+        }
+      ]
+    );
   };
 
   const editarPesquisa = async (id, novoNome, novaData, image) => {
@@ -115,18 +144,6 @@ const ModificarPesquisa = (props) => {
     } catch (error) {
       console.error('Erro ao deletar a pesquisa:', error);
     }
-  };
-
-
-  const handleImagePicker = () => {
-    launchImageLibrary({}, (response) => {
-      console.log(response);
-      if (response && response.assets && response.assets.length > 0) {
-        setImage(response.assets[0]);
-      } else {
-        console.error('Nenhuma imagem selecionada ou erro na seleção da imagem');
-      }
-    });
   };
 
   return (
