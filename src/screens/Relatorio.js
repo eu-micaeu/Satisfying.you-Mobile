@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import PieChart from 'react-native-pie-chart';
 import { doc, getDoc } from "firebase/firestore";
-import { db } from "../config/firebase"; 
+import { db } from "../config/firebase";
+import { useSelector } from 'react-redux';
 
 const Relatorio = (props) => {
+    const id = useSelector((state)=>state.pesquisa.id);
     const [series, setSeries] = useState([0, 0, 0, 0, 0]); 
     const [isDataLoaded, setIsDataLoaded] = useState(false); 
     const widthAndHeight = 250;
@@ -12,7 +14,6 @@ const Relatorio = (props) => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const id = props.route.params.id;
             const pesquisaRef = doc(db, "pesquisas", id); 
             const pesquisaSnap = await getDoc(pesquisaRef);
             
@@ -23,7 +24,7 @@ const Relatorio = (props) => {
                     data.avaliacaoB || 0,
                     data.avaliacaoN || 0,
                     data.avaliacaoR || 0,
-                    data.avaliacaoP || 0, 
+                    data.avaliacaoP || 0,
                 ];
                 
                 setSeries(newSeries);

@@ -6,9 +6,7 @@ const Agradecimentos = (props) => {
   useEffect(() => {
     const timer = setTimeout(() => {
 
-      const id = props.route.params.id;
-      const nome = props.route.params.nome;
-      props.navigation.navigate('Coleta', { id: id, nome: nome })
+      props.navigation.navigate('Coleta')
 
     }, 3000);
 

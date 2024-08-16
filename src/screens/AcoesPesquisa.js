@@ -3,20 +3,15 @@ import { View, Text, Pressable, Image } from 'react-native';
 const AcoesPesquisa = (props) => {
 
   goToRelatorio = () => {
-    const id = props.route.params.id;
-    const nome = props.route.params.nome;
-    props.navigation.navigate('Relatório', { id: id, nome: nome } );
+    props.navigation.navigate('Relatório');
   }
 
   goToColeta = () => {
-    const id = props.route.params.id;
-    const nome = props.route.params.nome;
-    props.navigation.navigate('Coleta', { id: id, nome: nome } );
+    props.navigation.navigate('Coleta');
   }
 
   goToModificar = () => {
-    const id = props.route.params.id;
-    props.navigation.navigate('Modificar Pesquisa', { id: id });
+    props.navigation.navigate('Modificar Pesquisa');
   }
 
   return (

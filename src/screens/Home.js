@@ -3,8 +3,12 @@ import { View, Text, StyleSheet, Image, Pressable, FlatList, TouchableOpacity } 
 import { TextInput } from 'react-native-paper';
 import app from "../config/firebase";
 import { collection, getFirestore, onSnapshot, query } from 'firebase/firestore';
+import { useDispatch } from 'react-redux';
+import { reducerSetPesquisa } from '../../redux/pesquisaSlice';
 
 const Home = (props) => {
+
+  const dispatch = useDispatch();
 
   const goToNovaPesquisa = () => {
     props.navigation.navigate('Nova Pesquisa');
@@ -50,7 +54,12 @@ const Home = (props) => {
   const itemPesquisa = ({ item }) => (
     <TouchableOpacity
       style={styles.card}
-      onPress={() => props.navigation.navigate('Ações da Pesquisa', { id: item.id , nome: item.nome})}
+      onPress={
+        () => {
+          dispatch(reducerSetPesquisa({id: item.id , nome: item.nome}))
+          props.navigation.navigate('Ações da Pesquisa')
+        }
+      }
     >
       {item.imagem ? <Image source={{ uri: item.imagem }} style={styles.cardImage} /> : null}
       <Text style={styles.title}>{item.nome}</Text>

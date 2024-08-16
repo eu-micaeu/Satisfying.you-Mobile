@@ -2,17 +2,15 @@ import React from "react";
 import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../config/firebase";
+import { useSelector } from "react-redux";
 
 const Coleta = (props) => {
-  // Desestruturação segura dos parâmetros
-  const { id, nome } = props.route.params || {};
-
-  console.log('Parâmetros recebidos:', props.route.params);
+  
+  const id = useSelector((state)=>state.pesquisa.id);
+  const nome = useSelector((state)=>state.pesquisa.nome);
 
   const goToAgradecimento = () => {
-    const id = props.route.params.id;
-    const nome = props.route.params.nome;
-    props.navigation.navigate('Agradecimentos', { id: id, nome: nome } );
+    props.navigation.navigate('Agradecimentos');
   };
 
   const icones = [
@@ -29,7 +27,7 @@ const Coleta = (props) => {
 
     if (pesquisaSnap.exists()) {
       const data = pesquisaSnap.data();
-      const currentValue = data[field] || 0; // Se o campo não existe, inicia com 0
+      const currentValue = data[field] || 0; 
 
       await updateDoc(pesquisaRef, {
         [field]: currentValue + 1

@@ -4,13 +4,14 @@ import { Button } from 'react-native-paper';
 import { updateDoc, doc, getFirestore, getDoc, deleteDoc } from 'firebase/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
 import { launchImageLibrary, launchCamera } from 'react-native-image-picker';
-
+import { useSelector } from 'react-redux';
 import { app } from '../config/firebase';
 
 const db = getFirestore(app);
 const storage = getStorage(app);
 
 const ModificarPesquisa = (props) => {
+  const id = useSelector((state)=>state.pesquisa.id);
   const [novoNome, setNovoNome] = useState('');
   const [novaData, setNovaData] = useState('');
   const [nomePesquisaError, setNomePesquisaError] = useState('');
@@ -168,7 +169,7 @@ const ModificarPesquisa = (props) => {
           {image && <Image source={{ uri: image.uri }} style={styles.image} />}
         </Pressable>
       </View>
-      <Button style={styles.buttonSalvar} onPress={() => editarPesquisa(props.route.params.id, novoNome, novaData, image)}>
+      <Button style={styles.buttonSalvar} onPress={() => editarPesquisa(id, novoNome, novaData, image)}>
         <Text style={styles.buttonSalvarText}>Salvar</Text>
       </Button>
       <TouchableOpacity onPress={togglePopUp} style={styles.apagar}>
@@ -180,7 +181,7 @@ const ModificarPesquisa = (props) => {
           <View style={styles.popup}>
             <Text style={styles.textPopUp}>Tem certeza de apagar essa pesquisa?</Text>
             <View style={styles.divOptions}>
-              <Button style={styles.optionSim} onPress={() => deletarPesquisa(props.route.params.id)}>
+              <Button style={styles.optionSim} onPress={() => deletarPesquisa(id)}>
                 <Text style={styles.buttonSalvarText}>SIM</Text>
               </Button>
               <Button style={styles.optionNao} onPress={togglePopUp}>
